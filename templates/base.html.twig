@@ -12,7 +12,7 @@
         {% endblock %}
 
         <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-
+        <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
@@ -22,7 +22,7 @@
         <ul>
             <li>
                 <a href="#">
-                    <img src="{{ asset('asset/img/logo.png') }}">
+                    <img class = "logo" src="{{ asset('asset/img/logo.png') }}">
                 </a>
             </li>
             <li>
