@@ -18,6 +18,22 @@
         {% endblock %}
     </head>
     <body>
+    <nav>
+        <ul>
+            <li>
+                <a href="#">Logo</a>
+            </li>
+            <li>
+                <a href="#">Accueil</a>
+            </li>
+            <li>
+                <a href="#">Mon profil</a>
+            </li>
+            <li>
+                <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
         {% block body %}{% endblock %}
     </body>
 </html>
