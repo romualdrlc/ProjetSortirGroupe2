@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -20,13 +21,20 @@ class FiltreSortieType extends AbstractType
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
+                'required'=>false
             ])
-            ->add('nomSortie')
+            ->add('nomSortie',EntityType::class,[
+                'class'=>Sortie::class,
+                'choice_label'=>'nom',
+                'required'=>false
+            ])
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
+                'required'=>false
             ])
             ->add('public', ChoiceType::class, [
                 'multiple' => true,
@@ -37,7 +45,8 @@ class FiltreSortieType extends AbstractType
                     "Sorties auxquelles je ne suis pas inscrite" => 3,
                     "Sorties passées" => 4,
                 ],
-                'expanded' => true
+                'expanded' => true,
+                'required'=>false
             ])
             ->add('Rechercher', SubmitType::class, [
                 'attr' => ['class' => 'Rechercher'],
