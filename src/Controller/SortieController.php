@@ -32,7 +32,9 @@ class SortieController extends AbstractController
                 'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
             ]);
         } else {
-            $sorties = $sortieRepository->findByField($tabRequest);
+            $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
+            $campus = $campusRepository->find($tabRequest["campus"]);
+            $sorties = $sortieRepository->findByField($sortie,$campus);
             return $this->renderForm('sortie/index.html.twig',
                 compact( 'sorties','form'));
 
