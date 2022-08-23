@@ -12,7 +12,6 @@
             <th>Date de la sortie</th>
             <th>Campus</th>
             <th>Lieu</th>
-            <th><label for="motif">Motif</label></th>
         </tr>
         </thead>
         <tbody>
@@ -23,9 +22,6 @@
                 <td>{{ sortie.campus.nom }}</td>
                 <td>{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</td>
             {% endif %}
-                <td>
-                    <input type="text" name="motif" value="">
-                </td>
         </tr>
         </tbody>
     </table>

@@ -22,19 +22,19 @@ class SortieController extends AbstractController
     /**
      * @Route("/", name="app_sortie_index")
      */
-    public function index(SortieRepository $sortieRepository,CampusRepository $campusRepository,Request $request,EntityManagerInterface $em): Response
+    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
         //dd($tabRequest);
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
+                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView()
             ]);
         } else {
             $sorties = $sortieRepository->findByField($tabRequest);
             return $this->renderForm('sortie/index.html.twig',
-                compact( 'sorties','form'));
+                compact('sorties', 'form'));
 
         }
     }
@@ -67,7 +67,7 @@ class SortieController extends AbstractController
     {
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
-            'participants'=> $sortie->getParticipants(),
+            'participants' => $sortie->getParticipants(),
         ]);
     }
 
@@ -107,10 +107,9 @@ class SortieController extends AbstractController
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
-
-            $this->addFlash('success','Cette sortie a bien été supprimer!');
+            $this->addFlash('success', 'Cette sortie a bien été supprimer pour la raison suivante : ' . $request->request->get('motif', "défaut"));
 
         }
 
