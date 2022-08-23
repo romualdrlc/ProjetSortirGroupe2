@@ -28,11 +28,6 @@ class ParticipantType extends AbstractType
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
             ])
-            ->add('sorties',EntityType::class,[
-                'class'=>Sortie::class,
-                'choice_label'=>'nom',
-                'multiple'=>true,
-            ])
             ->add('photo')
             ->add('Annuler',ResetType::class,[
                 'attr' => ['class' => 'save'],

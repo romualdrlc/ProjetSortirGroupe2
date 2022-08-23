@@ -36,11 +36,7 @@ class SortieType extends AbstractType
                 'class'=>Lieu::class,
                 'choice_label'=>'nom',
             ])
-            ->add('participants',EntityType::class,[
-                'class'=>Participant::class,
-                'choice_label'=>'nom',
-                'multiple'=>true,
-            ])
+
             ->add('Annuler',ResetType::class,[
                 'attr' => ['class' => 'save'],
             ])
