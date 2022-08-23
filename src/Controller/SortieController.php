@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\FiltreSortieType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,9 @@ class SortieController extends AbstractController
      */
     public function index(SortieRepository $sortieRepository): Response
     {
+        $form = $this->createForm(FiltreSortieType::class);
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
         ]);
     }
 
@@ -77,12 +79,26 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/delete", name="app_sortie_delete_page", methods={"GET"})
+     */
+    public function deletePage(Sortie $sortie): Response
+    {
+        return $this->render('sortie/delete.html.twig', [
+            'sortie' => $sortie,
+        ]);
+    }
+
+
+    /**
      * @Route("/{id}", name="app_sortie_delete", methods={"POST"})
      */
     public function delete(Request $request, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$sortie->getId(), $request->request->get('_token'))) {
             $sortieRepository->remove($sortie, true);
+
+            $this->addFlash('success','Cette sortie a bien été supprimer!');
+
         }
 
         return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);

@@ -3,14 +3,17 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
+    <div>
+        {{ form(form) }}
+    </div>
     <h1>Sortie index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nom</th>
-                <th>DateHeureDebut</th>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
                 <th>Duree</th>
                 <th>DateLimiteInscription</th>
                 <th>NbInscriptionsMax</th>
@@ -40,6 +43,11 @@
         {% endfor %}
         </tbody>
     </table>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endfor %}
 
     <a href="{{ path('app_sortie_new') }}">Create new</a>
 {% endblock %}

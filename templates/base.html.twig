@@ -11,9 +11,9 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-        <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
@@ -24,13 +24,13 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="{{ path('app_sortie_index') }}">
                         <img class = "logo" src="{{ asset('asset/img/logo.png') }}">
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">Accueil</a>
+                    <a href="{{ path('app_sortie_index') }}">Accueil</a>
                 </li>
                 {% if app.user %}
                 <li>
