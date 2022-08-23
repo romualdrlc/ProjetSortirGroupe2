@@ -63,6 +63,17 @@
         </tbody>
     </table>
 
+    <label for="participant">Participants :</label>
+
+    <select name="participant" id="pet-participant">
+        {% for part in participants %}
+            <option value="">{{ part.nom }}</option>
+        {% endfor %}
+
+    </select>
+
+
+
     <a href="{{ path('app_sortie_index') }}">Retour à la liste</a>
 
     <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier cette sortie</a>
