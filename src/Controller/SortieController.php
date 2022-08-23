@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,6 @@ class SortieController extends AbstractController
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
-        //dd($tabRequest);
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
                 'sorties' => $sortieRepository->findAll(), 'form' => $form->createView()
