@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +33,9 @@ class ParticipantType extends AbstractType
                 'multiple'=>true,
             ])
             ->add('photo')
+            ->add('Annuler',ResetType::class,[
+                'attr' => ['class' => 'save'],
+            ])
         ;
     }
 
