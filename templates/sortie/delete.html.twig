@@ -21,7 +21,7 @@
                 <td>{{ sortie.nom }}</td>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.campus.nom }}</td>
-                <td>{{ sortie.lieu.nom }}</td>
+                <td>{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</td>
             {% endif %}
                 <td>
                     <input type="text" name="motif" value="">
