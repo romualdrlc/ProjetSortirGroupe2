@@ -9,6 +9,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,6 +40,9 @@ class SortieType extends AbstractType
                 'class'=>Participant::class,
                 'choice_label'=>'nom',
                 'multiple'=>true,
+            ])
+            ->add('Annuler',ResetType::class,[
+                'attr' => ['class' => 'save'],
             ])
         ;
     }

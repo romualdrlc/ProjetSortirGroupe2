@@ -55,6 +55,7 @@ class SortieController extends AbstractController
     {
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
+            'participants'=> $sortie->getParticipants(),
         ]);
     }
 
