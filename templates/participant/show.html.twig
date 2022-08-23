@@ -3,45 +3,38 @@
 {% block title %}Participant{% endblock %}
 
 {% block body %}
-    <h1>Participant</h1>
+    <h1>Mon profil</h1>
 
+    <div class="photo">
+        <img  src="{{ participant.photo }}">
+    </div>
     <table class="table">
-        <tbody>make
+        <tbody>
+        <tr>
+            <th>Pseudo</th>
+            <td>{{ participant.pseudo }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ participant.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ participant.nom }}</td>
+        </tr>
+        <tr>
+            <th>Telephone</th>
+            <td>{{ participant.telephone }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ participant.email }}</td>
+        </tr>
 
-
-
-            <tr>
-                <th>Email</th>
-                <td>{{ participant.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ participant.roles ? participant.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ participant.password }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ participant.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ participant.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ participant.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Administrateur</th>
-                <td>{{ participant.administrateur ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ participant.actif ? 'Yes' : 'No' }}</td>
-            </tr>
+        <tr>
+            <th>Campus :</th>
+          <td> {{ participant.campus.nom }}</td>
+        </tr>
         </tbody>
     </table>
 
