@@ -17,6 +17,11 @@ body{
     display : flex;
     flex-direction: column;
     justify-content: center;
+}
 
-
+.photo{
+    width: 10vw;
+    height: 10vh;
+    max-width: 150px;
+    max-height: 150px;
 }

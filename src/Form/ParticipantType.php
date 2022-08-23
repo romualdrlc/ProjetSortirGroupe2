@@ -31,6 +31,7 @@ class ParticipantType extends AbstractType
                 'choice_label'=>'nom',
                 'multiple'=>true,
             ])
+            ->add('photo')
         ;
     }
 
