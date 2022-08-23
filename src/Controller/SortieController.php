@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
 use App\Form\SortieType;
+use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,14 +20,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/", name="app_sortie_index", methods={"GET"})
+     * @Route("/", name="app_sortie_index")
      */
-    public function index(SortieRepository $sortieRepository): Response
+    public function index(SortieRepository $sortieRepository,CampusRepository $campusRepository,Request $request,EntityManagerInterface $em): Response
     {
         $form = $this->createForm(FiltreSortieType::class);
-        return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
-        ]);
+        $tabRequest = $request->get("filtre_sortie");
+        //dd($tabRequest);
+        if ($tabRequest == null) {
+            return $this->render('sortie/index.html.twig', [
+                'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
+            ]);
+        } else {
+            $sorties = $sortieRepository->findByField($tabRequest);
+            return $this->renderForm('sortie/index.html.twig',
+                compact( 'sorties','form'));
+
+        }
     }
 
     /**
