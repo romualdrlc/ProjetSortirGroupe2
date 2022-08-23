@@ -1,0 +1,45 @@
+INSERT INTO `participant` (`nom`,`prenom`,`telephone`,`email`,`motPasse`,`administrateur`,`actif`)
+VALUES
+  ("Mariam","Barr","06 19 70 85 11","lectus.pede@protonmail.ca","amet,","false","false"),
+  ("Fatima","Figueroa","01 01 17 61 48","nulla.donec@icloud.edu","pharetra","true","true"),
+  ("Molly","Mcgowan","07 27 68 30 79","libero@aol.ca","ornare","true","false"),
+  ("Jacqueline","Cummings","06 32 37 98 72","nam.ac@aol.ca","Cras","true","false"),
+  ("Latifah","Gonzales","09 57 28 16 93","mauris.integer.sem@yahoo.edu","et","false","true"),
+  ("Megan","Reynolds","08 41 88 11 27","erat.nonummy@hotmail.org","lobortis","false","true"),
+  ("Reuben","Bright","04 65 68 35 54","orci.luctus@hotmail.net","mi","true","true"),
+  ("Xandra","Montoya","04 21 76 78 84","tincidunt.congue@hotmail.org","aliquet","true","false"),
+  ("Fletcher","Stokes","06 67 43 71 43","purus.gravida@outlook.couk","elit.","true","false"),
+  ("Neville","Thomas","05 82 42 73 16","fusce.feugiat.lorem@google.net","magnis","true","false");
+
+INSERT INTO `participant` (`nom`,`prenom`,`telephone`,`email`,`password`,`administrateur`,`actif`,`roles`) VALUES ("Isaac","Copeland","04 82 14 54 47","tincidunt.aliquam@google.ca","ante",false,true,'{"roles" : "ROLE_USER"}'), ("Denise","Gilbert","07 80 05 37 32","est.tempor@outlook.com","sit",true,false,'{"roles" : "ROLE_USER"}'), ("Kylan","Ward","07 71 79 77 38","lacinia@google.couk","eu,",true,true,'{"roles" : "ROLE_USER"}'), ("Aretha","Mcclure","02 66 77 72 21","ullamcorper.nisl.arcu@google.net","a",false,true,'{"roles" : "ROLE_USER"}'), ("Drake","Ayers","02 62 36 43 45","nibh.quisque@aol.couk","mauris",false,true,'{"roles" : "ROLE_USER"}'), ("Levi","Martinez","08 62 14 88 26","lectus.nullam.suscipit@icloud.com","arcu.",true,true,'{"roles" : "ROLE_USER"}'), ("Wylie","Ward","08 78 77 51 91","ac.turpis.egestas@aol.ca","ante.",false,true,'{"roles" : "ROLE_USER"}'), ("Leigh","Joyner","02 68 04 42 42","adipiscing.elit@yahoo.org","a",true,true,'{"roles" : "ROLE_U[...]
+
+INSERT INTO `sortie` (`nom`,`date_heure_debut`,`duree`,`date_limite_inscription`,`nb_inscriptions_max`,`infos_sortie`)
+VALUES
+  ("Philo",'2012-06-18 10:34:09',90,'2012-06-18 10:34:09',20,"cours de philo trop cool"),
+  ("Origamie",'2020-06-18 10:34:09',120,'2020-06-18 10:34:09',10,"cours origamie super fun"),
+  ("Perles",'2018-06-18 10:34:09',90,'2018-06-18 10:34:09',20,"cours d'enfilage de perles trop cool"),
+  ("Concert metal",'2016-06-18 10:34:09',120,'2016-06-18 10:34:09',10,"concert de dorothee");
+
+
+
+
+
+INSERT INTO `etat` (`id`, `libelle`) VALUES (NULL, 'Cr��e'), (NULL, 'Ouverte');
+INSERT INTO `etat` (`id`, `libelle`) VALUES (NULL, 'Cl�tur�e'), (NULL, 'Activit� en cours');
+INSERT INTO `etat` (`id`, `libelle`) VALUES (NULL, 'Pass�e'), (NULL, 'Annul�e');
+
+
+
+
+
+
+INSERT INTO `ville` (`id`, `nom`, `code_postal`) VALUES (NULL, 'Nantes', '44300'), (NULL, 'Paris', '75000');
+INSERT INTO `ville` (`id`, `nom`, `code_postal`) VALUES (NULL, 'Lyon', '69000'), (NULL, 'Bordeaux', '30072');
+
+INSERT INTO `campus` (`nom`)
+VALUES
+  ("St Herblain"),
+("Rennes"),
+("Brest"),
+("Paris"),
+("Bordeaux");

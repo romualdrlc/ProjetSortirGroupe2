@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Form\FiltreSortieType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,9 @@ class SortieController extends AbstractController
      */
     public function index(SortieRepository $sortieRepository): Response
     {
+        $form = $this->createForm(FiltreSortieType::class);
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sortieRepository->findAll(),'form' => $form->createView()
         ]);
     }
 
