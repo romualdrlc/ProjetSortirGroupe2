@@ -9,5 +9,6 @@
 
     <a href="{{ path('app_sortie_index') }}">back to list</a>
 
-    {{ include('sortie/_delete_form.html.twig') }}
+    <a href="{{ path('app_sortie_delete_page',{'id':sortie.id}) }}">Annuler cette sortie</a>
+
 {% endblock %}

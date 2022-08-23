@@ -43,6 +43,11 @@
         {% endfor %}
         </tbody>
     </table>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endfor %}
 
     <a href="{{ path('app_sortie_new') }}">Create new</a>
 {% endblock %}
