@@ -42,18 +42,24 @@ class SortieRepository extends ServiceEntityRepository
     /**
      * @return Sortie[] Returns an array of Sortie objects
      */
-    public function findByField($value): array
+    public function findByField($sortie,$campus): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.campus = :val')
-            ->andWhere('s.nom = :val')
-            ->setParameter('val', $value['campus'])
-            ->setParameter('val', $value['nomSortie'])
-            ->orderBy('s.id', 'ASC')
+        $requete = $this->createQueryBuilder('s');
+
+        if ($campus != null) {
+            $requete->andWhere('s.campus = :campus')->setParameter('campus', $campus);
+
+        }
+        if ($sortie != null) {
+            $requete->andWhere('s.nom = :nomSortie')->setParameter('nomSortie', $sortie->getNom());
+
+        }
+        return $requete
+            //->orderBy('s.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+
     }
 
 //    public function findOneBySomeField($value): ?Sortie
