@@ -8,39 +8,63 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
+                <th>Nom de la sortie</th>
                 <td>{{ sortie.nom }}</td>
             </tr>
             <tr>
-                <th>DateHeureDebut</th>
+                <th>Date et heure de la sortie</th>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Duree</th>
-                <td>{{ sortie.duree }}</td>
+                <td>{{ sortie.duree }} minutes</td>
             </tr>
             <tr>
-                <th>DateLimiteInscription</th>
+                <th>Date limite d'inscription</th>
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>NbInscriptionsMax</th>
+                <th>Nombre de places</th>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
             </tr>
             <tr>
-                <th>InfosSortie</th>
+                <th>Description et infos</th>
                 <td>{{ sortie.infosSortie }}</td>
             </tr>
         </tbody>
     </table>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Campus</th>
+                <td>{{ sortie.campus.nom }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ sortie.lieu.nom }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ sortie.lieu.rue }} </td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ sortie.lieu.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ sortie.lieu.longitude }}</td>
+            </tr>
 
-    <a href="{{ path('app_sortie_index') }}">back to list</a>
+        </tbody>
+    </table>
 
-    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">edit</a>
+    <a href="{{ path('app_sortie_index') }}">Retour à la liste</a>
 
-    {{ include('sortie/_delete_form.html.twig') }}
+    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier cette sortie</a>
+
 {% endblock %}
