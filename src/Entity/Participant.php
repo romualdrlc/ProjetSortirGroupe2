@@ -372,6 +372,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     {
         list (
             $this->id,
+            $this->password
             ) = unserialize($serialized);
     }
 
