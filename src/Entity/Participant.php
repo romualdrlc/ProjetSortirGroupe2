@@ -364,7 +364,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     {
         return serialize(array(
             $this->id,
-            $this->password
+            $this->password,
+            $this->email
         ));
     }
 
@@ -372,7 +373,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     {
         list (
             $this->id,
-            $this->password
+            $this->password,
+            $this->email
             ) = unserialize($serialized);
     }
 
