@@ -364,6 +364,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     {
         return serialize(array(
             $this->id,
+            $this->password
         ));
     }
 
