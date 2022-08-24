@@ -15,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  * @Vich\Uploadable
  */
+
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
@@ -87,21 +88,31 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Vich\UploadableField(mapping="product_images", fileNameProperty="photo")
-     * @var File
      */
     private ?File $imageFile = null;
 
 
     /**
-     * @Vich\UploadableField(mapping="user_contracts", fileNameProperty="contract")
-     * @var File
-     */
-    private $contractFile;
-
-    /**
      * @ORM\Column(type="datetime")
      * @var \DateTime
-     */    private $updatedAt;
+     */
+    private $updatedAt;
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
 
     public function __construct()

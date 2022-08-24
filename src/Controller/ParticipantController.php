@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/participant")
  */
@@ -29,7 +30,7 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/new", name="app_participant_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, ParticipantRepository $participantRepository): Response
+    public function new(Request $request, ParticipantRepository $participantRepository,EntityManagerInterface $em): Response
     {
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
@@ -37,7 +38,8 @@ class ParticipantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->add($participant, true);
-
+            $em->persist($participant);
+            $em->flush();
 
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }
