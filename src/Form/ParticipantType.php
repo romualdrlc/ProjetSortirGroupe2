@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -55,7 +56,13 @@ class ParticipantType extends AbstractType
             ])
             ->add('imageFile',VichFileType::class,[
             'required'=>false])
-
+            ->add('roles',ChoiceType::class,[
+                'multiple'=>true,
+                'choices'=>[
+                    'Admin'=>"ROLE_ADMIN",
+                    'User'=>"ROLE_USER",
+                ]
+            ])
             ->add('Annuler',ResetType::class,[
                 'attr' => ['class' => 'save'],
             ])

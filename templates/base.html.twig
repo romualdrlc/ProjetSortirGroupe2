@@ -10,10 +10,10 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
-
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.4/dist/css/uikit.min.css"/>
     <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    {#    <link rel="stylesheet" href="https://unpkg.com/mvp.css"> #}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
@@ -21,44 +21,75 @@
 <body>
 
 <header>
-    <nav>
-        <ul>
-            <li>
-                <a href="{{ path('app_sortie_index') }}">
-                    <img class="logo" src="{{ asset('asset/img/logo.png') }}">
-                </a>
-            </li>
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
 
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="{{ path('app_sortie_index') }}">
+                        <img class="logo" src="{{ asset('asset/img/logo.png') }}">
+                    </a>
+                </li>
+            </ul>
 
-            {% if app.user %}
-                <li>
-                    <a href="{{ path('app_sortie_index') }}">Accueil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                </li>
-            {% else %}
-                <li>
-                    <a href="{{ path('app_sortie_index') }}">Accueil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                </li>
-            {% endif %}
-        </ul>
+        </div>
+        <div class="uk-navbar-right">
+
+            <ul class="uk-navbar-nav">
+                {% if app.user %}
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li>
+                            <a href="#">Ville</a>
+                        </li>
+                        <li>
+                            <a href="#">Campus</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li>
+                        <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        </div>
+
     </nav>
 </header>
 
 {% block body %}{% endblock %}
 
-<footer>
-    Sortir.com©
-    <br>
-    Créer par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER
 
+<footer>
+    <div class="uk-background-muted uk-height-large">
+        <div class="uk-card uk-card-default uk-card-body uk-text-center uk-position-z-index" uk-sticky="end: !.uk-height-large; offset: 80; media: 1600">  Sortir.com© Créer par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER</div>
+    </div>
 </footer>
+
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.15.4/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.15.4/dist/js/uikit-icons.min.js"></script>
 </body>
 </html>
