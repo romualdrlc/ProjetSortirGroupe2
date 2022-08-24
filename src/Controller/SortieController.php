@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
 use App\Form\SortieType;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * @Route("/sortie")
@@ -34,7 +36,7 @@ class SortieController extends AbstractController
         } else {
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
-            $sorties = $sortieRepository->findByField($sortie,$campus);
+            $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
                 compact('sorties', 'form'));
 
@@ -116,5 +118,55 @@ class SortieController extends AbstractController
         }
 
         return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * *@Route ("/inscrit/{sortie}", name="app_inscription")
+     */
+    public function inscription(
+        Sortie                 $sortie,
+        SortieRepository       $sortieRepository,
+        ParticipantRepository  $participantRepository,
+        EntityManagerInterface $entityManager
+    )
+    {
+        $mail = $this->getUser()->getUserIdentifier();
+        $moimeme = $participantRepository->findOneBy(["email" => $mail]);
+        //$sortie = $sortieRepository->find();
+
+        if ($sortie->getParticipants()->count() <= $sortie->getNbInscriptionsMax()) {
+            if (new \DateTime('now') <= $sortie->getDateLimiteInscription()) {
+                $sortie->addParticipant($moimeme);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_sortie_index');
+            }
+
+        }
+        return $this->render('app_sortie_index');
+    }
+
+    /**
+     * *@Route ("/desinscrit/{sortie}", name="app_desinscription")
+     */
+    public function desinscription(
+        Sortie $sortie,
+        SortieRepository $sortieRepository,
+        ParticipantRepository  $participantRepository,
+        EntityManagerInterface $entityManager
+    )
+    {
+        $mail = $this->getUser()->getUserIdentifier();
+        $moimeme = $participantRepository->findOneBy(["email" => $mail]);
+
+
+                $sortie->removeParticipant($moimeme);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_sortie_index');
+
+
     }
 }
