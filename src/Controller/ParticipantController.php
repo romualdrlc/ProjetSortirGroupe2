@@ -69,11 +69,11 @@ class ParticipantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $participantRepository->add($participant, true);
+            //$participantRepository->add($participant, true);
             $em->persist($participant);
             $em->flush();
 
-            return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
+           return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('participant/edit.html.twig', [

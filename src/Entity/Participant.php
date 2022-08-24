@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  */
 
-class Participant implements UserInterface, PasswordAuthenticatedUserInterface
+class Participant implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -342,6 +342,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
 
+
     public function getImageFile()
     {
         return $this->imageFile;
@@ -359,7 +360,19 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
             return $this;
         }
     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+        ));
+    }
 
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            ) = unserialize($serialized);
+    }
 
 
 
