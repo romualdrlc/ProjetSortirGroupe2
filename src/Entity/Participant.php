@@ -118,6 +118,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->sortiesOrganisees = new ArrayCollection();
+        $this->organisateur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,7 +154,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return (string)$this->pseudo;
     }
 
     /**
@@ -377,9 +379,5 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
             $this->email
             ) = unserialize($serialized);
     }
-
-
-
-
 
 }

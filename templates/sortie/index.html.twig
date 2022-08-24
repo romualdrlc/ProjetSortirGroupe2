@@ -36,7 +36,7 @@
                 {% else %}
                     <td></td>
                 {% endif %}
-                <td></td>
+                <td>{{ sortie.organisateur }}</td>
                 <td>
                     <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
                     <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
