@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    {# Pour le responsive #}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="{{ asset('asset/img/favi.png') }}" type="image/x-icon"/>
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+    <head>
+        <meta charset="UTF-8" >
+        {# Pour le responsive #}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon"  href="{{ asset('asset/img/favi.png') }}" type="image/x-icon" />
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
 
 
-    <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-</head>
-<body>
+        <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
 
-<header>
-    <nav>
-        <ul>
-            <li>
-                <a href="{{ path('app_sortie_index') }}">
-                    <img class="logo" src="{{ asset('asset/img/logo.png') }}">
-                </a>
-            </li>
-
-
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ path('app_sortie_index') }}">
+                        <img class = "logo" src="{{ asset('asset/img/logo.png') }}">
+                    </a>
+                </li>
             {% if app.user %}
-                <li>
-                    <a href="{{ path('app_sortie_index') }}">Accueil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
-                </li>
-                <li>
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li>
+                        <a href="#">Ville</a>
+                    </li>
+                    <li>
+                        <a href="#">Campus</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                    {% else %}
+                        <li>
+                            <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </li>
+                {% endif %}
             {% else %}
                 <li>
                     <a href="{{ path('app_sortie_index') }}">Accueil</a>
@@ -52,13 +68,13 @@
     </nav>
 </header>
 
-{% block body %}{% endblock %}
+        {% block body %}{% endblock %}
 
-<footer>
-    Sortir.com©
-    <br>
-    Créer par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER
+    <footer>
+        Sortir.com©
+        <br>
+         Créer par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER
 
-</footer>
-</body>
+    </footer>
+    </body>
 </html>
