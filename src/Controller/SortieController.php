@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/", name="app_sortie_index")
+     * @Route("/", name="app_sortie_index", methods={"GET"})
      */
     public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request, EntityManagerInterface $em): Response
     {
@@ -128,14 +128,12 @@ class SortieController extends AbstractController
      */
     public function inscription(
         Sortie                 $sortie,
-        SortieRepository       $sortieRepository,
         ParticipantRepository  $participantRepository,
         EntityManagerInterface $entityManager
     )
     {
         $mail = $this->getUser()->getUserIdentifier();
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
-        //$sortie = $sortieRepository->find();
 
         if ($sortie->getParticipants()->count() <= $sortie->getNbInscriptionsMax()) {
             if (new \DateTime('now') <= $sortie->getDateLimiteInscription()) {
@@ -147,7 +145,7 @@ class SortieController extends AbstractController
             }
 
         }
-        return $this->render('app_sortie_index');
+        return $this->render('sortie/index.html.twig');
     }
 
     /**
@@ -155,7 +153,6 @@ class SortieController extends AbstractController
      */
     public function desinscription(
         Sortie $sortie,
-        SortieRepository $sortieRepository,
         ParticipantRepository  $participantRepository,
         EntityManagerInterface $entityManager
     )
@@ -169,7 +166,6 @@ class SortieController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_sortie_index');
-
 
     }
 }
