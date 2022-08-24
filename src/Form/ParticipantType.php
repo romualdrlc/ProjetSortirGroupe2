@@ -8,6 +8,7 @@ use App\Entity\Participant;
 use phpDocumentor\Reflection\Type;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -15,6 +16,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+
 
 class ParticipantType extends AbstractType
 {
@@ -42,7 +45,7 @@ class ParticipantType extends AbstractType
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 0,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
@@ -53,7 +56,9 @@ class ParticipantType extends AbstractType
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
             ])
-            ->add('photo')
+            ->add('imageFile',VichFileType::class,[
+            'required'=>false])
+
             ->add('Annuler',ResetType::class,[
                 'attr' => ['class' => 'save'],
             ])

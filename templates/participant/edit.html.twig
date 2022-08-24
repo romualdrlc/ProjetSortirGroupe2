@@ -6,7 +6,7 @@
     <h1>Mon Profil</h1>
 
     <div class="photo">
-        <img  src="{{ participant.photo }}">
+        <img  src="{{ asset("images/profil/"~participant.photo) }}">
     </div>
 
     {{ include('participant/_form.html.twig', {'button_label': 'Update'}) }}

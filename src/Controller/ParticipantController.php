@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,7 @@ class ParticipantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->add($participant, true);
 
+
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,13 +61,15 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_participant_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Participant $participant, ParticipantRepository $participantRepository): Response
+    public function edit(Request $request, Participant $participant, ParticipantRepository $participantRepository,EntityManagerInterface $em): Response
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->add($participant, true);
+            $em->persist($participant);
+            $em->flush();
 
             return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
         }

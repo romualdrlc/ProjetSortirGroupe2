@@ -8,9 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
+ * @Vich\Uploadable
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -82,6 +85,25 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $photo;
 
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="photo")
+     * @var File
+     */
+    private ?File $imageFile = null;
+
+
+    /**
+     * @Vich\UploadableField(mapping="user_contracts", fileNameProperty="contract")
+     * @var File
+     */
+    private $contractFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */    private $updatedAt;
+
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -111,7 +133,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -119,7 +141,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -295,4 +317,41 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function setImageFile(File $photo = null)
+    {
+        $this->imageFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+    /*
+        public function getContact(): ?string
+        {
+            return $this->contract;
+        }
+
+        public function setContact(string $contract): self
+        {
+            $this->nom = $contract;
+
+            return $this;
+        }
+    */
+
+
+
+
+
+
 }
