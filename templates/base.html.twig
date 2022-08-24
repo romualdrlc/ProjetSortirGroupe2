@@ -38,10 +38,10 @@
                 {% if app.user %}
                     {% if is_granted("ROLE_ADMIN") %}
                         <li>
-                            <a href="#">Ville</a>
+                            <a href="{{ path('app_ville_index') }}">Ville</a>
                         </li>
                         <li>
-                            <a href="#">Campus</a>
+                            <a href="{{ path('app_campus_index') }}">Campus</a>
                         </li>
                         <li>
                             <a href="{{ path('app_sortie_index') }}">Accueil</a>

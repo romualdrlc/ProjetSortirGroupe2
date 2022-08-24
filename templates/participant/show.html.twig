@@ -3,37 +3,28 @@
 {% block title %}Participant{% endblock %}
 
 {% block body %}
+
     <h1>{{ participant.pseudo }}</h1>
+    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+        <div class="uk-card-media-left uk-cover-container">
+            <img src="{{ asset("images/profil/"~participant.photo) }}" alt="" uk-cover>
+            <canvas width="600" height="400"></canvas>
+        </div>
+        <div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{ participant.prenom }}</h3>
+                <h3 class="uk-card-title">{{ participant.nom }}</h3>
+                <h3 class="uk-card-title">{{ participant.telephone }}</h3>
+                <h3 class="uk-card-title">{{ participant.email }}</h3>
+                <h3 class="uk-card-title">{{ participant.campus.nom }}</h3>
 
-    <div class="photo">
-        <img  src="{{ asset("images/profil/"~participant.photo) }}">
+            </div>
+        </div>
     </div>
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Prenom</th>
-            <td>{{ participant.prenom }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ participant.nom }}</td>
-        </tr>
-        <tr>
-            <th>Telephone</th>
-            <td>{{ participant.telephone }}</td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td>{{ participant.email }}</td>
-        </tr>
 
-        <tr>
-            <th>Campus :</th>
-          <td> {{ participant.campus.nom }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <p uk-margin>
+        <a class="uk-button uk-button-default" href="{{ path('app_participant_edit', {'id': participant.id}) }}">Modifier votre profil</a>
+    </p>
 
-    <a href="{{ path('app_participant_edit', {'id': participant.id}) }}">Modifier votre profil</a>
 
 {% endblock %}

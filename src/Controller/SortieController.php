@@ -128,14 +128,12 @@ class SortieController extends AbstractController
      */
     public function inscription(
         Sortie                 $sortie,
-        SortieRepository       $sortieRepository,
         ParticipantRepository  $participantRepository,
         EntityManagerInterface $entityManager
     )
     {
         $mail = $this->getUser()->getUserIdentifier();
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
-        //$sortie = $sortieRepository->find();
 
 
             if (new \DateTime('now') <= $sortie->getDateLimiteInscription()) {
@@ -154,7 +152,6 @@ class SortieController extends AbstractController
      */
     public function desinscription(
         Sortie $sortie,
-        SortieRepository $sortieRepository,
         ParticipantRepository  $participantRepository,
         EntityManagerInterface $entityManager
     )
@@ -162,9 +159,13 @@ class SortieController extends AbstractController
         $mail = $this->getUser()->getUserIdentifier();
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
 
+
                 $sortie->removeParticipant($moimeme);
                 $entityManager->persist($sortie);
                 $entityManager->flush();
+
                 return $this->redirectToRoute('app_sortie_index');
+
+
     }
 }
