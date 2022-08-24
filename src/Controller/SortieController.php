@@ -44,14 +44,16 @@ class SortieController extends AbstractController
     /**
      * @Route("/new", name="app_sortie_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setOrganisateur($this->getUser()->getUserIdentifier());
+            $mail = $this->getUser()->getUserIdentifier();
+            $organisateur = $participantRepository->findOneBy(["email"=>$mail]);
+            $sortie->setOrganisateur($organisateur->getPseudo());
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
