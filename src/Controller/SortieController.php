@@ -137,7 +137,7 @@ class SortieController extends AbstractController
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
         //$sortie = $sortieRepository->find();
 
-        if ($sortie->getParticipants()->count() <= $sortie->getNbInscriptionsMax()) {
+
             if (new \DateTime('now') <= $sortie->getDateLimiteInscription()) {
                 $sortie->addParticipant($moimeme);
                 $entityManager->persist($sortie);
@@ -146,8 +146,7 @@ class SortieController extends AbstractController
                 return $this->redirectToRoute('app_sortie_index');
             }
 
-        }
-        return $this->render('app_sortie_index');
+        return $this->render('sortie/index.html.twig');
     }
 
     /**
@@ -163,13 +162,9 @@ class SortieController extends AbstractController
         $mail = $this->getUser()->getUserIdentifier();
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
 
-
                 $sortie->removeParticipant($moimeme);
                 $entityManager->persist($sortie);
                 $entityManager->flush();
-
                 return $this->redirectToRoute('app_sortie_index');
-
-
     }
 }
