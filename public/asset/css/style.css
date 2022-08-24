@@ -25,3 +25,8 @@ body{
     max-width: 150px;
     max-height: 150px;
 }
+
+.checkboxClass{
+    display: flex;
+    flex-direction: column;
+}

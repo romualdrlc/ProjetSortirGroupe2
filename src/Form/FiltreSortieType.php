@@ -38,6 +38,9 @@ class FiltreSortieType extends AbstractType
             ])
             ->add('public', ChoiceType::class, [
                 'multiple' => true,
+                'attr' => [
+                    'class' => 'checkboxClass'
+                ],
                 'label'=> false,
                 'choices'  => [
                     "Sorties dont je suis l'oganisateur" => 1,
@@ -47,9 +50,6 @@ class FiltreSortieType extends AbstractType
                 ],
                 'expanded' => true,
                 'required'=>false
-            ])
-            ->add('Rechercher', SubmitType::class, [
-                'attr' => ['class' => 'Rechercher'],
             ])
         ;
     }
