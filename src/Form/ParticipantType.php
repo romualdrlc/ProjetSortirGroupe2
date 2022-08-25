@@ -53,15 +53,22 @@ class ParticipantType extends AbstractType
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
+                "attr" => [
+                    "class" => "uk-select"
+                ],
             ])
             ->add('imageFile',VichFileType::class,[
-            'required'=>false])
+                'required'=>false,
+            ])
             ->add('roles',ChoiceType::class,[
                 'multiple'=>true,
                 'choices'=>[
                     'Admin'=>"ROLE_ADMIN",
                     'User'=>"ROLE_USER",
-                ]
+                ],
+                "attr" => [
+                    "class" => "uk-select"
+                ],
             ])
             ->add('Annuler',ResetType::class,[
                 'attr' => ['class' => 'save'],
