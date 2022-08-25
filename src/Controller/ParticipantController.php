@@ -50,6 +50,22 @@ class ParticipantController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/{pseudo}", name="app_participant_show_pseudo", methods={"GET"})
+     */
+    public function showByPseudo(
+        string $pseudo,
+        Participant $participant,
+        ParticipantRepository $participantRepository
+    ): Response
+    {
+        $participant = $participantRepository->findOneBy((["pseudo" => $pseudo]));
+        return $this->render('participant/show.html.twig', [
+            'participant' => $participant,
+        ]);
+    }
+
     /**
      * @Route("/{id}", name="app_participant_show", methods={"GET"})
      */
@@ -59,6 +75,7 @@ class ParticipantController extends AbstractController
             'participant' => $participant,
         ]);
     }
+
 
     /**
      * @Route("/{id}/edit", name="app_participant_edit", methods={"GET", "POST"})
