@@ -1,5 +1,6 @@
 <div class="uk-form-horizontal uk-margin-large">
     {{ form_start(form) }}
+    <input type="hidden" name="_token" id="tokenid" value="{{ csrf_token('delete')}}"/>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.pseudo) }}</label>
         <div class="uk-form-controls">
@@ -27,20 +28,20 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.email) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="email" name="{{ field_name(form.email) }}" value="{{ field_value(form.email) }}">
+            <input class="uk-input" id="form-horizontal-text" type="email" value="{{ field_value(form.email) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.first) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password" name="{{ field_name(form.password.first) }}"
+            <input class="uk-input" id="form-horizontal-text" type="password"
                    value="{{ field_value(form.password.first) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.second) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password"  name="{{ field_name(form.password.second) }}"
+            <input class="uk-input" id="form-horizontal-text" type="password"
                    value="{{ field_value(form.password.second) }}">
         </div>
     </div>

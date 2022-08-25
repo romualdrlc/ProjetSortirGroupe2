@@ -38,6 +38,7 @@ class ParticipantController extends AbstractController
     {
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
+        $registrationForm = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,6 +52,7 @@ class ParticipantController extends AbstractController
         return $this->renderForm('participant/new.html.twig', [
             'participant' => $participant,
             'form' => $form,
+            'registrationForm'=>$registrationForm
         ]);
     }
 

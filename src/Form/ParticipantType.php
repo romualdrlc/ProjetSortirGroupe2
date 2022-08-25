@@ -77,6 +77,9 @@ class ParticipantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Participant::class,
+            'csrf_protection' => false,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'tokenid',
         ]);
     }
 }
