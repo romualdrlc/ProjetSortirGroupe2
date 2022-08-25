@@ -56,7 +56,7 @@ class ParticipantController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="app_participant_show", methods={"GET"})
+     * @Route("/{id}", name="app_participant_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Participant $participant): Response
     {
