@@ -77,7 +77,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     private $sorties;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $pseudo;
 
