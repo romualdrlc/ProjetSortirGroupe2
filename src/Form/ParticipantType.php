@@ -70,9 +70,6 @@ class ParticipantType extends AbstractType
                     "class" => "uk-select"
                 ],
             ])
-            ->add('Annuler',ResetType::class,[
-                'attr' => ['class' => 'save'],
-            ])
         ;
     }
 

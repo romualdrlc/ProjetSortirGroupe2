@@ -35,6 +35,7 @@ class VilleController extends AbstractController
         $ville = new Ville();
         $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
+        dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $villeRepository->add($ville, true);
@@ -79,10 +80,11 @@ class VilleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_ville_delete", methods={"POST"})
+     * @Route("/{id}", name="app_ville_delete")
      */
     public function delete(Request $request, Ville $ville, VilleRepository $villeRepository): Response
     {
+
         if ($this->isCsrfTokenValid('delete'.$ville->getId(), $request->request->get('_token'))) {
             $villeRepository->remove($ville, true);
         }
