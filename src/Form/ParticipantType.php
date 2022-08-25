@@ -70,6 +70,7 @@ class ParticipantType extends AbstractType
                     "class" => "uk-select"
                 ],
             ])
+            ->add('actif')
         ;
     }
 

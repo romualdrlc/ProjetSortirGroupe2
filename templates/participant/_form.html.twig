@@ -28,20 +28,20 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.email) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="email" value="{{ field_value(form.email) }}">
+            <input class="uk-input" id="form-horizontal-text" type="email" name="{{ field_name(form.email) }}" value="{{ field_value(form.email) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.first) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password"
+            <input class="uk-input" id="form-horizontal-text" type="password" name="{{ field_name(form.password.first) }}"
                    value="{{ field_value(form.password.first) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.second) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password"
+            <input class="uk-input" id="form-horizontal-text" type="password" name="{{ field_name(form.password.second) }}"
                    value="{{ field_value(form.password.second) }}">
         </div>
     </div>
@@ -61,6 +61,7 @@
         <input type="file" multiple>
         <button class="uk-button uk-button-default" type="button" tabindex="-1">{{ form_row(form.imageFile) }}</button>
     </div>
+    {{ form_row(form.actif) }}
     <p uk-margin>
         <button class="uk-button uk-button-default" type="submit">Enregistrer</button>
     </p>

@@ -38,8 +38,16 @@ class ParticipantController extends AbstractController
     {
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
-        $registrationForm = $this->createForm(ParticipantType::class, $participant);
+
         $form->handleRequest($request);
+
+
+        if ($request->get('participant') != null) {
+            $tab = $request->get('participant');
+            $participant->setPassword($tab["password"]["first"]);
+            dump($request);
+            dump($tab["password"]["first"]);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->add($participant, true);
@@ -52,7 +60,6 @@ class ParticipantController extends AbstractController
         return $this->renderForm('participant/new.html.twig', [
             'participant' => $participant,
             'form' => $form,
-            'registrationForm'=>$registrationForm
         ]);
     }
 
@@ -74,6 +81,7 @@ class ParticipantController extends AbstractController
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
+        $cloneUser = clone $participant;
 
         if ($form->isSubmitted() && $form->isValid()) {
             //$participantRepository->add($participant, true);

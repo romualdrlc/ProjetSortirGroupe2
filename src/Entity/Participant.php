@@ -57,10 +57,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
 
     /**
      * @ORM\Column(type="boolean")
@@ -248,17 +244,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
         return $this;
     }
 
-    public function isAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
 
     public function isActif(): ?bool
     {
