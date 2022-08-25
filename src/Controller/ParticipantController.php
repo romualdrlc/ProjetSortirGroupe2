@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ class ParticipantController extends AbstractController
 
     /**
      * @Route("/new", name="app_participant_new", methods={"GET", "POST"})
+     *
      */
     public function new(Request $request, ParticipantRepository $participantRepository,EntityManagerInterface $em): Response
     {
@@ -52,21 +54,6 @@ class ParticipantController extends AbstractController
 
 
     /**
-     * @Route("/{pseudo}", name="app_participant_show_pseudo", methods={"GET"})
-     */
-    public function showByPseudo(
-        string $pseudo,
-        Participant $participant,
-        ParticipantRepository $participantRepository
-    ): Response
-    {
-        $participant = $participantRepository->findOneBy((["pseudo" => $pseudo]));
-        return $this->render('participant/show.html.twig', [
-            'participant' => $participant,
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="app_participant_show", methods={"GET"})
      */
     public function show(Participant $participant): Response
@@ -75,7 +62,6 @@ class ParticipantController extends AbstractController
             'participant' => $participant,
         ]);
     }
-
 
     /**
      * @Route("/{id}/edit", name="app_participant_edit", methods={"GET", "POST"})

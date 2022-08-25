@@ -124,6 +124,21 @@ class SortieController extends AbstractController
     }
 
     /**
+     * @Route("/organisateur/{pseudo}", name="app_participant_show_pseudo", methods={"GET"})
+     */
+    public function showByPseudo(
+        string $pseudo,
+        Participant $participant,
+        ParticipantRepository $participantRepository
+    ): Response
+    {
+        $participant = $participantRepository->findOneBy((["pseudo" => $pseudo]));
+        return $this->render('participant/show.html.twig', [
+            'participant' => $participant,
+        ]);
+    }
+
+    /**
      * *@Route ("/inscrit/{sortie}", name="app_inscription")
      */
     public function inscription(
