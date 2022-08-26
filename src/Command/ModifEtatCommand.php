@@ -46,24 +46,32 @@ class ModifEtatCommand extends Command
 
        $Allsortie = $this->sortieRepository->findAll();
        $Alletat = $this->etatRepository->findAll();
-       $maintenant = new \DateTime;
+       $maintenantErreur = new \DateTime;
+       $maintenant = $maintenantErreur->modify("+120 minutes");
+        //date_default_timezone_set('Europe/Paris');
+       // $maintenant = new \DateTime();
 
 
         foreach ($Allsortie as $sortie){
 
-        if ($maintenant >= $sortie->getDateHeureDebut() && $maintenant <= $sortie->getDateHeureDebut()->modify('+'.$sortie->getDuree().'minutes')){
-
-            $sortie->setEtat($Alletat[3]);
-        }
-        elseif ($maintenant > $sortie->getDateLimiteInscription()){
+        if ($maintenant > $sortie->getDateLimiteInscription()){
 
             $sortie->setEtat($Alletat[2]);
         }
-        elseif($maintenant < $sortie->getDateLimiteInscription()) {
+        if($maintenant < $sortie->getDateLimiteInscription()) {
 
             $sortie->setEtat($Alletat[1]);
         }
 
+            $dateHeureDebut = clone $sortie->getDateHeureDebut();
+            $dateFinActivite = ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
+
+
+        if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
+            $sortie->setEtat($Alletat[3]);
+            dump($maintenant);
+            dump($dateHeureDebut);
+        }
         $this->entityManager->persist($sortie);
         $this->entityManager->flush();
         }
