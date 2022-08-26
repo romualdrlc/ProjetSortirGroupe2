@@ -22,8 +22,9 @@
                     <p uk-margin>
                         <a class="uk-button uk-button-default" href="{{ path('app_ville_show', {'id': ville.id}) }}">show</a>
                         <a class="uk-button uk-button-default" href="{{ path('app_ville_edit', {'id': ville.id}) }}">edit</a>
+                        {{ include('ville/_delete_form.html.twig') }}
                     </p>
-                    {{ include('ville/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
