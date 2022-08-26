@@ -3,92 +3,93 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
+    <div class="uk-container">
+        <div><span class="uk-label">Toutes les sorties</span></div>
+        <div class="uk-flex uk-flex-center uk-margin">
+            {{ form_start(form) }}
+            <div class="uk-flex">
+                <div class="uk-flex uk-flex-column uk-margin-right">
+                    <div class="uk-margin">
+                        {{ form_label(form.campus) }}
+                        {{ form_widget(form.campus) }}
+                    </div>
+                    <div class="uk-margin">
+                        {{ form_label(form.nomSortie) }}
+                        {{ form_widget(form.nomSortie) }}
+                    </div>
+                    <div class="uk-margin">
+                        Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }}
+                    </div>
+                </div>
+                <div class="uk-flex uk-flex-column uk-margin-left">
+                    {{ form_label(form.public) }} {{ form_widget(form.public) }}
+                </div>
+            </div>
+            <button class="uk-button uk-button-default">Rechercher</button>
 
-    <div><span class="uk-label">Toutes les sorties</span></div>
-    <div class="uk-flex uk-flex-center uk-margin">
-        {{ form_start(form) }}
-        <div class="uk-flex">
-            <div class="uk-flex uk-flex-column uk-margin-right">
-                <div class="uk-margin">
-                    {{ form_label(form.campus) }}
-                    {{ form_widget(form.campus) }}
-                </div>
-                <div class="uk-margin">
-                    {{ form_label(form.nomSortie) }}
-                    {{ form_widget(form.nomSortie) }}
-                </div>
-                <div class="uk-margin">
-                    Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }}
-                </div>
-            </div>
-            <div class="uk-flex uk-flex-column uk-margin-left">
-                {{ form_label(form.public) }} {{ form_widget(form.public) }}
-            </div>
+            {{ form_end(form) }}
+
         </div>
-        <button class="uk-button uk-button-default">Rechercher</button>
 
-        {{ form_end(form) }}
-
-    </div>
-
-    <table class="uk-table uk-table-divider">
-        <thead>
-        <tr>
-            <th>Nom de la sortie</th>
-            <th>Date de la sortie</th>
-            <th>Duree</th>
-            <th>Cloture</th>
-            <th>Inscrits/Places</th>
-            <th>Etat</th>
-            <th>Inscrit</th>
-            <th>Organisateur</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for sortie in sorties %}
+        <table class="uk-table uk-table-divider">
+            <thead>
             <tr>
-                <td>{{ sortie.nom }}</td>
-                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.duree }}</td>
-                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-                <td> {{ sortie.participants.count }}/ {{ sortie.nbInscriptionsMax }}</td>
-                <td>{{ sortie.etat.libelle }}</td>
-                {% if app.user in sortie.participants %}
-                    <td>X</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                <td>
-                    <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.organisateur}) }}"> {{ sortie.organisateur }} </a>
-                </td>
-                <td>
-                    <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
-                    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-                    <a href="{{ path('app_sortie_delete', {'id': sortie.id}) }}">Annuler</a>
-
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Duree</th>
+                <th>Cloture</th>
+                <th>Inscrits/Places</th>
+                <th>Etat</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for sortie in sorties %}
+                <tr>
+                    <td>{{ sortie.nom }}</td>
+                    <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ sortie.duree }}</td>
+                    <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
+                    <td> {{ sortie.participants.count }}/ {{ sortie.nbInscriptionsMax }}</td>
+                    <td>{{ sortie.etat.libelle }}</td>
                     {% if app.user in sortie.participants %}
-                        <a href="{{ path('app_desinscription',{'sortie': sortie.id})}}">Se désister </a>
-                   {% elseif app.user not in sortie.participants and sortie.participants.count < sortie.nbInscriptionsMax %}
-                       <a href="{{ path('app_inscription', {'sortie': sortie.id})}}">S'inscrire</a>
-
+                        <td>X</td>
+                    {% else %}
+                        <td></td>
                     {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-    </table>
+                    <td>
+                        <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.organisateur}) }}"> {{ sortie.organisateur }} </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
+                        <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+                        <a href="{{ path('app_sortie_delete', {'id': sortie.id}) }}">Annuler</a>
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    {% endfor %}
+                        {% if app.user in sortie.participants %}
+                            <a href="{{ path('app_desinscription',{'sortie': sortie.id}) }}">Se désister </a>
+                        {% elseif app.user not in sortie.participants and sortie.participants.count < sortie.nbInscriptionsMax %}
+                            <a href="{{ path('app_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
 
-    <p uk-margin>
-        <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle sortie</a>
-    </p>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endfor %}
+
+        <p uk-margin>
+            <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle sortie</a>
+        </p>
+    </div>
 {% endblock %}
