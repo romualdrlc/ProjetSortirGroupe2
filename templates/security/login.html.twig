@@ -39,8 +39,11 @@
                                     <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">Login
                                     </button>
                                 </div>
-                                <div class="uk-text-small uk-text-center">
-                                    Not registered? <a href="#">Create an account</a>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="_remember_me" checked/>
+                                        Keep me logged in
+                                    </label>
                                 </div>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                             </form>
