@@ -38,6 +38,9 @@
                 {% if app.user %}
                     {% if is_granted("ROLE_ADMIN") %}
                         <li>
+                            <a href="{{ path('app_participant_index') }}">Gérer les utilisateurs</a>
+                        </li>
+                        <li>
                             <a href="{{ path('app_ville_index') }}">Ville</a>
                         </li>
                         <li>

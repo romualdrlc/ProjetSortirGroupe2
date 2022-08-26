@@ -6,10 +6,14 @@ use App\Entity\Participant;
 use App\Form\ParticipantType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -19,6 +23,7 @@ class ParticipantController extends AbstractController
 {
     /**
      * @Route("/", name="app_participant_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(ParticipantRepository $participantRepository): Response
     {
@@ -29,12 +34,30 @@ class ParticipantController extends AbstractController
 
     /**
      * @Route("/new", name="app_participant_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function new(Request $request, ParticipantRepository $participantRepository,EntityManagerInterface $em): Response
+    public function new(
+        Request $request,
+        ParticipantRepository $participantRepository,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $em
+    ): Response
     {
         $participant = new Participant();
         $form = $this->createForm(ParticipantType::class, $participant);
+
         $form->handleRequest($request);
+
+
+        if ($request->get('participant') != null) {
+            $tab = $request->get('participant');
+            $password = $tab["password"]["first"];
+            $hashedPassword = $passwordHasher->hashPassword(
+                $participant,
+                $password
+            );
+            $participant->setPassword($hashedPassword);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participantRepository->add($participant, true);
@@ -50,8 +73,9 @@ class ParticipantController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/{id}", name="app_participant_show", methods={"GET"})
+     * @Route("/{id}", name="app_participant_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Participant $participant): Response
     {
@@ -67,6 +91,7 @@ class ParticipantController extends AbstractController
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
+        $cloneUser = clone $participant;
 
         if ($form->isSubmitted() && $form->isValid()) {
             //$participantRepository->add($participant, true);
@@ -84,6 +109,7 @@ class ParticipantController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_participant_delete", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Participant $participant, ParticipantRepository $participantRepository): Response
     {

@@ -6,6 +6,7 @@ use App\Repository\ParticipantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -14,8 +15,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  * @Vich\Uploadable
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     /**
@@ -56,10 +57,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
      */
     private $telephone;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $administrateur;
 
     /**
      * @ORM\Column(type="boolean")
@@ -77,7 +74,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     private $sorties;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $pseudo;
 
@@ -179,7 +176,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword():  string
     {
         return $this->password;
     }
@@ -247,17 +244,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
         return $this;
     }
 
-    public function isAdministrateur(): ?bool
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(bool $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
 
     public function isActif(): ?bool
     {

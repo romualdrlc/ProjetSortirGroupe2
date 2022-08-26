@@ -30,7 +30,6 @@ class ParticipantType extends AbstractType
 
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
@@ -53,19 +52,24 @@ class ParticipantType extends AbstractType
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
+                "attr" => [
+                    "class" => "uk-select"
+                ],
             ])
             ->add('imageFile',VichFileType::class,[
-            'required'=>false])
+                'required'=>false,
+            ])
             ->add('roles',ChoiceType::class,[
                 'multiple'=>true,
                 'choices'=>[
                     'Admin'=>"ROLE_ADMIN",
                     'User'=>"ROLE_USER",
-                ]
+                ],
+                "attr" => [
+                    "class" => "uk-select"
+                ],
             ])
-            ->add('Annuler',ResetType::class,[
-                'attr' => ['class' => 'save'],
-            ])
+            ->add('actif')
         ;
     }
 
@@ -73,6 +77,9 @@ class ParticipantType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Participant::class,
+            'csrf_protection' => false,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'tokenid',
         ]);
     }
 }

@@ -1,61 +1,68 @@
-{# {{ form_start(form) }} #}
-{#    {{ form_widget(form) }} #}
-{#    <button class="btn">{{ button_label|default('Save') }}</button> #}
-{# {{ form_end(form) }} #}
-<form class="uk-form-horizontal uk-margin-large">
+<div class="uk-form-horizontal uk-margin-large">
     {{ form_start(form) }}
+    <input type="hidden" name="_token" id="tokenid" value="{{ csrf_token('delete')}}"/>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.pseudo) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" value="{{ field_value(form.pseudo) }}">
+            <input class="uk-input" id="form-horizontal-text" type="text" name="{{ field_name(form.pseudo) }}" value="{{ field_value(form.pseudo) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.prenom) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" value="{{ field_value(form.prenom) }}">
+            <input class="uk-input" id="form-horizontal-text" type="text" name="{{ field_name(form.prenom) }}" value="{{ field_value(form.prenom) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.nom) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" value="{{ field_value(form.nom) }}">
+            <input class="uk-input" id="form-horizontal-text" type="text" name="{{ field_name(form.nom) }}" value="{{ field_value(form.nom) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.telephone) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="tel" value="{{ field_value(form.telephone) }}">
+            <input class="uk-input" id="form-horizontal-text" type="tel" name="{{ field_name(form.telephone) }}" value="{{ field_value(form.telephone) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.email) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="email" value="{{ field_value(form.email) }}">
+            <input class="uk-input" id="form-horizontal-text" type="email" name="{{ field_name(form.email) }}" value="{{ field_value(form.email) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.first) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password"
+            <input class="uk-input" id="form-horizontal-text" type="password" name="{{ field_name(form.password.first) }}"
                    value="{{ field_value(form.password.first) }}">
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.password.second) }}</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="password"
+            <input class="uk-input" id="form-horizontal-text" type="password" name="{{ field_name(form.password.second) }}"
                    value="{{ field_value(form.password.second) }}">
         </div>
     </div>
     <div class="uk-margin">
-        <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.campus) }}</label>
+        <label class="uk-form-label" for="form-horizontal-text">{{ form_label(form.campus) }}</label>
         <div class="uk-form-controls">
-            <select class="uk-select" id="{{ field_name(form.campus) }}" name="{{ field_name(form.campus) }}" size="3">
-                <option value="{{ field_value(form.campus) }}">{{ field_name(form.campus) }}</option>
-            </select>
+            {{ form_row(form.campus) }}
         </div>
     </div>
-
-    {{ form_end(form) }}
-</form>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">{{ form_label(form.roles) }}</label>
+        <div class="uk-form-controls">
+            {{ form_row(form.roles) }}
+        </div>
+    </div>
+    <div class="js-upload" uk-form-custom>
+        <input type="file" multiple>
+        <button class="uk-button uk-button-default" type="button" tabindex="-1">{{ form_row(form.imageFile) }}</button>
+    </div>
+    <p uk-margin>
+        <button class="uk-button uk-button-default" type="submit">Enregistrer</button>
+    </p>
+    {{ form_end(form,{render_rest: false}) }}
+</div>

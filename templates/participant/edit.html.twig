@@ -3,12 +3,16 @@
 {% block title %}Edit Participant{% endblock %}
 
 {% block body %}
-    <h1>Mon Profil</h1>
+    <div class="uk-container">
 
-    <div class="photo">
-        <img  src="{{ asset("images/profil/"~participant.photo) }}">
+        <h1>Mon Profil</h1>
+
+        <div class="photo">
+            <img src="{{ asset("images/profil/"~participant.photo) }}">
+        </div>
+
+        {{ include('participant/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('participant/_delete_form.html.twig', {'button_label': 'Delete'}) }}
     </div>
-
-    {{ include('participant/_form.html.twig', {'button_label': 'Update'}) }}
-
 {% endblock %}
