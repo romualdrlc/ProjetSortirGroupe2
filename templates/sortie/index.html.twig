@@ -62,14 +62,25 @@
                 <td>{{ sortie.organisateur }}</td>
                 <td>
                     <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
-                    <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-                    <a href="{{ path('app_sortie_delete', {'id': sortie.id}) }}">Annuler</a>
 
-                    {% if app.user in sortie.participants %}
-                        <a href="{{ path('app_desinscription',{'sortie': sortie.id})}}">Se désister </a>
-                   {% elseif app.user not in sortie.participants and sortie.participants.count < sortie.nbInscriptionsMax %}
-                       <a href="{{ path('app_inscription', {'sortie': sortie.id})}}">S'inscrire</a>
+                    {% if app.user.pseudo in sortie.organisateur %}
 
+                        {% if sortie.etat.libelle == "Créée" %}
+                             <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+                        {% endif %}
+
+                        {% if sortie.etat.libelle == "Ouverte"%}
+                          <a href="{{ path('app_sortie_delete', {'id': sortie.id}) }}">Annuler</a>
+                        {% endif %}
+
+                    {% endif %}
+
+                    {% if app.user.pseudo not in sortie.organisateur %}
+                        {% if app.user in sortie.participants %}
+                            <a href="{{ path('app_desinscription',{'sortie': sortie.id})}}">Se désister </a>
+                        {% elseif app.user not in sortie.participants and sortie.participants.count < sortie.nbInscriptionsMax %}
+                           <a href="{{ path('app_inscription', {'sortie': sortie.id})}}">S'inscrire</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
