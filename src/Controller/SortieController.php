@@ -8,6 +8,7 @@ use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
+use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -151,7 +152,7 @@ class SortieController extends AbstractController
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
 
 
-            if (new \DateTime('now') <= $sortie->getDateLimiteInscription()) {
+            if ($sortie->getEtat()->getLibelle() ==='Ouverte' ) {
                 $sortie->addParticipant($moimeme);
                 $entityManager->persist($sortie);
                 $entityManager->flush();
@@ -180,7 +181,7 @@ class SortieController extends AbstractController
                 $entityManager->flush();
 
                 return $this->redirectToRoute('app_sortie_index');
-
-
     }
+
 }
+
