@@ -33,10 +33,12 @@ class SortieController extends AbstractController
         $tabRequest = $request->get("filtre_sortie");
         $isCheck = false;
         $listeInscrit = []  ;
+        $listeSortiePassee = [];
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,'listeInscrit' => $listeInscrit
+                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,
+                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee
             ]);
         } else {
             dump($tabRequest);
@@ -52,10 +54,14 @@ class SortieController extends AbstractController
                     $listeInscrit = $sortieRepository->findBy(["participant" => $this->getUser()]);
                     dump($listeInscrit);
                 }
+                if ($tabRequest['public'][0] == "4") {
+                    $listeSortiePassee = $sortieRepository->findBy(["etat" => "5"]);
+                    dump($listeSortiePassee);
+                }
             }
 
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form','isCheck','listeInscrit'));
+                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee'));
         }
     }
 
