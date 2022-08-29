@@ -54,11 +54,11 @@ class SortieController extends AbstractController
     /**
      * @Route("/new", name="app_sortie_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
         $sortie = new Sortie();
         $etat = new Etat();
-        $etat->setLibelle('Créée');
+        $etat = $etatRepository->find(1);
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
