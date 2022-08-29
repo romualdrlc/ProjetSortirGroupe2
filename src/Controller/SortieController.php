@@ -34,34 +34,33 @@ class SortieController extends AbstractController
         $isCheck = false;
         $listeInscrit = []  ;
         $listeSortiePassee = [];
+        $listeNonInscrit = [];
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
                 'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,
-                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee
+                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee,'listeNonInscrit' => $listeNonInscrit
             ]);
         } else {
-            dump($tabRequest);
-
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
-            $sorties = $sortieRepository->findByField($sortie, $campus);
             if (isset($tabRequest['public'])) {
                 if (($tabRequest['public'][0] == "1")) {
                     $isCheck = true;
                 }
                 if ($tabRequest['public'][0] == "2") {
                     $listeInscrit = $sortieRepository->findBy(["participant" => $this->getUser()]);
-                    dump($listeInscrit);
+                }
+                if ($tabRequest['public'][0] == "3") {
+                    $listeNonInscrit = $sortieRepository->findAll();
                 }
                 if ($tabRequest['public'][0] == "4") {
                     $listeSortiePassee = $sortieRepository->findBy(["etat" => "5"]);
-                    dump($listeSortiePassee);
                 }
             }
-
+            $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee'));
+                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee','listeNonInscrit'));
         }
     }
 

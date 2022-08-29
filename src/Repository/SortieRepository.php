@@ -46,10 +46,8 @@ class SortieRepository extends ServiceEntityRepository
     public function findByField($sortie,$campus): array
     {
         $requete = $this->createQueryBuilder('s');
-
         if ($campus != null) {
             $requete->andWhere('s.campus = :campus')->setParameter('campus', $campus);
-
         }
         if ($sortie != null) {
             $requete->andWhere('s.nom = :nomSortie')->setParameter('nomSortie', $sortie->getNom());
@@ -62,11 +60,11 @@ class SortieRepository extends ServiceEntityRepository
 
     }
 
-//    public function findOneBySomeField($value): ?Sortie
+//    public function findOneBySomeField($listeNoInscript): ?Sortie
 //    {
 //        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
+//            ->andWhere('s.participant = :val')
+//            ->setParameter('val', !$listeNoInscript)
 //            ->getQuery()
 //            ->getOneOrNullResult()
 //        ;
