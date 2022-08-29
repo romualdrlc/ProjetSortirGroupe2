@@ -80,4 +80,11 @@ class Etat
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getLibelle();        // TODO: Implement __toString() method.
+    }
+
+
 }

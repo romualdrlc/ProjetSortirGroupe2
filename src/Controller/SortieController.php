@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
@@ -57,11 +58,14 @@ class SortieController extends AbstractController
     public function new(Request $request, SortieRepository $sortieRepository): Response
     {
         $sortie = new Sortie();
+        $etat = new Etat();
+        $etat->setLibelle('Créée');
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setParticipant($this->getUser());
+            $sortie->setEtat($etat);
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
