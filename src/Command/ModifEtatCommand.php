@@ -76,7 +76,7 @@ class ModifEtatCommand extends Command
             $sortie->setEtat($ENCOURS);
         }
 
-        if($maintenant < $dateArchive)
+        if($maintenant > $dateArchive)
         {
         $sortie->setEtat($ARCHIVEE);
         }
