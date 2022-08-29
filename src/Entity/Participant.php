@@ -96,6 +96,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     private $updatedAt;
 
     /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="participant")
+     */
+    private $organisateur;
+
+    /**
      * @return \DateTime
      */
     public function getUpdatedAt(): \DateTime
@@ -364,6 +369,36 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
             $this->password,
             $this->email
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection<int, Sortie>
+     */
+    public function getOrganisateur(): Collection
+    {
+        return $this->organisateur;
+    }
+
+    public function addOrganisateur(Sortie $organisateur): self
+    {
+        if (!$this->organisateur->contains($organisateur)) {
+            $this->organisateur[] = $organisateur;
+            $organisateur->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganisateur(Sortie $organisateur): self
+    {
+        if ($this->organisateur->removeElement($organisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($organisateur->getParticipant() === $this) {
+                $organisateur->setParticipant(null);
+            }
+        }
+
+        return $this;
     }
 
 }

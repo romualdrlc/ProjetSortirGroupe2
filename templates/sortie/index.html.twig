@@ -60,7 +60,7 @@
                         <td></td>
                     {% endif %}
                     <td>
-                        <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.organisateur}) }}"> {{ sortie.organisateur }} </a>
+                        <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.participant.pseudo}) }}"> {{ sortie.participant.pseudo }} </a>
                     </td>
                     <td>
                         <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>

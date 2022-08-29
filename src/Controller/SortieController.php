@@ -30,6 +30,7 @@ class SortieController extends AbstractController
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
+        dump($tabRequest);
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
                 'sorties' => $sortieRepository->findAll(), 'form' => $form->createView()
@@ -54,9 +55,7 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $mail = $this->getUser()->getUserIdentifier();
-            $organisateur = $participantRepository->findOneBy(["email"=>$mail]);
-            $sortie->setOrganisateur($organisateur->getPseudo());
+            $sortie->setOrganisateur($this->getUser());
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);

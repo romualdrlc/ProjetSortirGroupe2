@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Client\Curl\User;
 
 /**
  * @extends ServiceEntityRepository<Sortie>
@@ -52,7 +53,6 @@ class SortieRepository extends ServiceEntityRepository
         }
         if ($sortie != null) {
             $requete->andWhere('s.nom = :nomSortie')->setParameter('nomSortie', $sortie->getNom());
-
         }
         return $requete
             //->orderBy('s.id', 'ASC')
