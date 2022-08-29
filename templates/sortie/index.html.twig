@@ -105,7 +105,7 @@
                         </td>
                         <td>
                             <a href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
-                        {% if app.user == sortie.participant%}
+                        {% if app.user == sortie.participant %}
                             <a href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
                             <a href="{{ path('app_sortie_delete_page', {'id': sortie.id}) }}">Annuler</a>
                         {% endif %}
