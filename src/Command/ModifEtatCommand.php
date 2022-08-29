@@ -50,26 +50,37 @@ class ModifEtatCommand extends Command
        $maintenant = $maintenantErreur->modify("+120 minutes");
         //date_default_timezone_set('Europe/Paris');
        // $maintenant = new \DateTime();
+        $ARCHIVEE = $Alletat[6];
+        $OUVERT = $Alletat[1];
+        $CLOTUREE = $Alletat[2];
+        $ENCOURS = $Alletat[3];
 
 
         foreach ($Allsortie as $sortie){
 
         if ($maintenant > $sortie->getDateLimiteInscription()){
 
-            $sortie->setEtat($Alletat[2]);
+            $sortie->setEtat($CLOTUREE);
         }
         if($maintenant < $sortie->getDateLimiteInscription()) {
 
-            $sortie->setEtat($Alletat[1]);
+            $sortie->setEtat($OUVERT);
         }
 
             $dateHeureDebut = clone $sortie->getDateHeureDebut();
             $dateFinActivite = ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
+            $dateArchive = ($sortie->getDateHeureDebut()->modify('+ 30 days'));
 
 
         if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
-            $sortie->setEtat($Alletat[3]);
+            $sortie->setEtat($ENCOURS);
         }
+
+        if($maintenant < $dateArchive)
+        {
+        $sortie->setEtat($ARCHIVEE);
+        }
+
         $this->entityManager->persist($sortie);
         $this->entityManager->flush();
         }
