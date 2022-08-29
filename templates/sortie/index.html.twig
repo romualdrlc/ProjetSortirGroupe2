@@ -47,6 +47,8 @@
             </thead>
             <tbody>
 
+         
+
             {% if isCheck %}
                 {% for sortie in app.user.organisateur %}
                     {% if sortie.etat.id != 7 %}
@@ -108,7 +110,7 @@
                             <a href="{{ path('app_sortie_delete_page', {'id': sortie.id}) }}">Annuler</a>
                         {% endif %}
 
-                        {% if sortie.etat.id == 2 %}
+                        {% if sortie.etat.id is same as (2)  %}
                             {% if app.user in sortie.participant %}
                                 <a href="{{ path('app_desinscription',{'sortie': sortie.id}) }}">Se désister </a>
                             {% elseif app.user not in sortie.participants and sortie.participants.count < sortie.nbInscriptionsMax %}

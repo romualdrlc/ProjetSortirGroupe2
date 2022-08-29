@@ -50,27 +50,35 @@ class ModifEtatCommand extends Command
        $maintenant = $maintenantErreur->modify("+120 minutes");
         //date_default_timezone_set('Europe/Paris');
        // $maintenant = new \DateTime();
-        $ARCHIVEE = $Alletat[6];
+
         $OUVERT = $Alletat[1];
         $CLOTUREE = $Alletat[2];
         $ENCOURS = $Alletat[3];
-
+        $PASSEE = $Alletat[4];
+        $ANNULEE = $Alletat[5];
+        $ARCHIVEE = $Alletat[6];
 
         foreach ($Allsortie as $sortie){
 
-        if ($maintenant > $sortie->getDateLimiteInscription()){
+            $dateHeureDebut = clone $sortie->getDateHeureDebut();
+            $dateFinActivite = clone ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
+            $dateArchive = ($sortie->getDateHeureDebut()->modify('+ 30 days'));
+
+        if ($maintenant > $sortie->getDateLimiteInscription() and $maintenant < $sortie->getDateHeureDebut()){
 
             $sortie->setEtat($CLOTUREE);
         }
+
+        if ($maintenant > $dateFinActivite ){
+
+            $sortie->setEtat($PASSEE);
+        }
+
+
         if($maintenant < $sortie->getDateLimiteInscription()) {
 
             $sortie->setEtat($OUVERT);
         }
-
-            $dateHeureDebut = clone $sortie->getDateHeureDebut();
-            $dateFinActivite = ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
-            $dateArchive = ($sortie->getDateHeureDebut()->modify('+ 30 days'));
-
 
         if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
             $sortie->setEtat($ENCOURS);
@@ -79,6 +87,10 @@ class ModifEtatCommand extends Command
         if($maintenant > $dateArchive)
         {
         $sortie->setEtat($ARCHIVEE);
+        }
+
+        if($sortie->getEtat()->getId() == 6) {
+            $sortie->setEtat($ANNULEE);
         }
 
         $this->entityManager->persist($sortie);
