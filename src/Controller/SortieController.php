@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\FiltreSortieType;
@@ -26,19 +27,25 @@ class SortieController extends AbstractController
     /**
      * @Route("/", name="app_sortie_index")
      */
-    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
+    public function index(ParticipantRepository $participantRepository,SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
-        dump($tabRequest);
+
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
                 'sorties' => $sortieRepository->findAll(), 'form' => $form->createView()
             ]);
         } else {
+            dump($tabRequest);
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
-            $sorties = $sortieRepository->findByField($sortie, $campus);
+            if ($tabRequest['public'][0] == "1") {
+                $organisateur = $participantRepository->find($this->getUser());
+            }
+
+            dump($organisateur);
+            $sorties = $sortieRepository->findByField($sortie, $campus,$organisateur);
             return $this->renderForm('sortie/index.html.twig',
                 compact('sorties', 'form'));
 
@@ -51,11 +58,14 @@ class SortieController extends AbstractController
     public function new(Request $request, SortieRepository $sortieRepository): Response
     {
         $sortie = new Sortie();
+        $etat = new Etat();
+        $etat->setLibelle('Créée');
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sortie->setParticipant($this->getUser());
+            $sortie->setEtat($etat);
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);

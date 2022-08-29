@@ -43,7 +43,7 @@ class SortieRepository extends ServiceEntityRepository
     /**
      * @return Sortie[] Returns an array of Sortie objects
      */
-    public function findByField($sortie,$campus): array
+    public function findByField($sortie,$campus,$organisateur): array
     {
         $requete = $this->createQueryBuilder('s');
 
@@ -53,6 +53,9 @@ class SortieRepository extends ServiceEntityRepository
         }
         if ($sortie != null) {
             $requete->andWhere('s.nom = :nomSortie')->setParameter('nomSortie', $sortie->getNom());
+        }
+        if ($organisateur != null) {
+            $requete->andWhere('s.participant = :pseudoOrganisateur')->setParameter('pseudoOrganisateur',$organisateur->getPseudo());
         }
         return $requete
             //->orderBy('s.id', 'ASC')
