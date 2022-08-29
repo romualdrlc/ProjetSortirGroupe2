@@ -31,23 +31,22 @@ class SortieController extends AbstractController
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
+        $isCheck = false;
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView()
+                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck
             ]);
         } else {
-            dump($tabRequest);
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
             if ($tabRequest['public'][0] == "1") {
-                $organisateur = $participantRepository->find($this->getUser());
+                $isCheck = true;
             }
-
-            dump($organisateur);
-            $sorties = $sortieRepository->findByField($sortie, $campus,$organisateur);
+            dump($tabRequest);
+            $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form'));
+                compact('sorties', 'form','isCheck'));
 
         }
     }
