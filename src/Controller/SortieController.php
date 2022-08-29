@@ -32,22 +32,29 @@ class SortieController extends AbstractController
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
         $isCheck = false;
+        $inscrit = "";
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck
+                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,'inscrit' => $inscrit
             ]);
         } else {
-            $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
-            $campus = $campusRepository->find($tabRequest["campus"]);
-            if ($tabRequest['public'][0] == "1") {
-                $isCheck = true;
-            }
             dump($tabRequest);
+            if ($tabRequest == null) {
+                $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
+                $campus = $campusRepository->find($tabRequest["campus"]);
+            } else {
+                if ($tabRequest['public'][0] == "1") {
+                    $isCheck = true;
+                }
+                if ($tabRequest['public'][0] == "2") {
+                    $inscrit = $sortieRepository->find($this->getUser());
+                    dump($inscrit);
+                }
+            }
             $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form','isCheck'));
-
+                compact('sorties', 'form','isCheck','inscrit'));
         }
     }
 
