@@ -6,6 +6,7 @@
     <h1>Créer une nouvelle sortie</h1>
 
     {{ include('sortie/_form.html.twig') }}
+    <a href="{{ path('app_lieu_new') }}">Ajouter un lieu de sortie</a>
 
     <a href="{{ path('app_sortie_index') }}">Retour à la liste</a>
 {% endblock %}
