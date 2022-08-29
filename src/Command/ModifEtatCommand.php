@@ -69,8 +69,6 @@ class ModifEtatCommand extends Command
 
         if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
             $sortie->setEtat($Alletat[3]);
-            dump($maintenant);
-            dump($dateHeureDebut);
         }
         $this->entityManager->persist($sortie);
         $this->entityManager->flush();
