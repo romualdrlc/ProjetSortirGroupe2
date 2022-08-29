@@ -50,11 +50,6 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $organisateur;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
      */
     private $etat;
@@ -221,18 +216,6 @@ class Sortie
         if ($this->participants->removeElement($participant)) {
             $participant->removeSorty($this);
         }
-
-        return $this;
-    }
-
-    public function getOrganisateur(): ?string
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?string $organisateur): self
-    {
-        $this->organisateur = $organisateur;
 
         return $this;
     }

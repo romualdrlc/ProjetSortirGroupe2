@@ -26,7 +26,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/", name="app_sortie_index")
      */
-    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request, EntityManagerInterface $em): Response
+    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
@@ -48,14 +48,14 @@ class SortieController extends AbstractController
     /**
      * @Route("/new", name="app_sortie_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository): Response
     {
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sortie->setOrganisateur($this->getUser());
+            $sortie->setParticipant($this->getUser());
             $sortieRepository->add($sortie, true);
 
             return $this->redirectToRoute('app_sortie_index', [], Response::HTTP_SEE_OTHER);
