@@ -3,4 +3,7 @@
 {% block body %}
     <p>Veuillez vous assurer que les pseudos et les adresses mails ne soient pas identiques avant de soumettre votre fichier.</p>
 {{ include('upload/_form.html.twig') }}
+    <p uk-margin>
+        <button class="uk-button uk-button-default" type="submit" onsubmit="alert('Votre fichier a bien été prise en compte. Les nouveaux utilisateurs seront enregistrés d\'ici 5 minutes')">Envoyer</button>
+    </p>
 {% endblock %}
