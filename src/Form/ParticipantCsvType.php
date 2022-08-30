@@ -40,7 +40,7 @@ class ParticipantCsvType extends AbstractType
                     ])
                 ],
             ])
-            ->add('send', SubmitType::class);
+            ->add('Envoyer', SubmitType::class);
 
     }
 
