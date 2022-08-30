@@ -1,6 +1,10 @@
 {{ form_start(formUpload) }}
-    {{ form_widget(formUpload) }}
+   {# {{ form_widget(formUpload) }}#}
+    {{ form_row(formUpload.upload_file) }}
+
 <p uk-margin>
-    <button class="uk-button uk-button-default" type="submit" onsubmit="alert('Votre fichier a bien été prise en compte. Les nouveaux utilisateurs seront enregistrés d\'ici 5 minutes')">Envoyer</button>
+    <button class="uk-button uk-button-default" type="submit" onsubmit="alert('Votre fichier a bien été prise en compte. Les nouveaux utilisateurs seront enregistrés d\'ici 5 minutes')">
+        {{ button_label|default('Envoyer') }}
+    </button>
 </p>
 {{ form_end(formUpload) }}
