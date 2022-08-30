@@ -74,6 +74,23 @@ class SortieRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Sortie[] Returns an array of Sortie objects by date
+     */
+    public function findByDate($beginDate,$endDate) {
+        $requete =  $this->createQueryBuilder('s' );
+        return $requete
+            ->where("s.dateHeureDebut > ?1")
+            ->andWhere("s.dateHeureDebut < ?2")
+            ->setParameter(1, $beginDate)
+            ->setParameter(2, $endDate)
+            ->getQuery()
+            ->getResult();
+
+
+
+    }
+
 //    public function findOneBySomeField($listeNoInscript): ?Sortie
 //    {
 //        return $this->createQueryBuilder('s')

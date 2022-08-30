@@ -35,13 +35,15 @@ class SortieController extends AbstractController
         $listeInscrit = []  ;
         $listeSortiePassee = [];
         $listeNonInscrit = [];
+        $filterByDate = [];
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
                 'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,
-                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee,'listeNonInscrit' => $listeNonInscrit
+                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee,'listeNonInscrit' => $listeNonInscrit,'filterByDate'=>$filterByDate
             ]);
         } else {
+            dump($tabRequest);
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
             if (isset($tabRequest['public'])) {
@@ -53,15 +55,19 @@ class SortieController extends AbstractController
                 }
                 if ($tabRequest['public'][0] == "3") {
                     $listeNonInscrit = $sortieRepository->findNonInscrit($this->getUser());
-                    dump($listeNonInscrit);
                 }
                 if ($tabRequest['public'][0] == "4") {
                     $listeSortiePassee = $sortieRepository->findBy(["etat" => "5"]);
                 }
             }
+            if (isset($tabRequest['dateDebut'])) {
+                $beginDate = $tabRequest['dateDebut'];
+                $endDate = $tabRequest['dateFin'];
+                $filterByDate = $sortieRepository->findByDate($beginDate,$endDate);
+            }
             $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee','listeNonInscrit'));
+                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee','listeNonInscrit','filterByDate'));
         }
     }
 
