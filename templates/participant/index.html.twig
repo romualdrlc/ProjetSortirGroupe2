@@ -39,6 +39,9 @@
                 <div colspan="10">no records found</div>
             </div>
         {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
 
     <div class="uk-grid uk-margin-medium">
         <div class="uk-width-1-5"></div>
@@ -49,4 +52,7 @@
         <div class="uk-width-1-5"></div>
         <div class="uk-width-1-5"></div>
     </div>
+
+    <p>Si vous souhaitez intégrer un fichier .csv contenant les participants à inscrire, <a href="{{ path('app_test_upload') }}">cliquez ici.</a>  </p>
+
 {% endblock %}
