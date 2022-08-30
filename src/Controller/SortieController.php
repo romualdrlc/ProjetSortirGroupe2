@@ -52,7 +52,8 @@ class SortieController extends AbstractController
                     $listeInscrit = $sortieRepository->findBy(["participant" => $this->getUser()]);
                 }
                 if ($tabRequest['public'][0] == "3") {
-                    $listeNonInscrit = $sortieRepository->findAll();
+                    $listeNonInscrit = $sortieRepository->findNonInscrit($this->getUser());
+                    dump($listeNonInscrit);
                 }
                 if ($tabRequest['public'][0] == "4") {
                     $listeSortiePassee = $sortieRepository->findBy(["etat" => "5"]);

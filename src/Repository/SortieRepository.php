@@ -6,6 +6,7 @@ use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use http\Client\Curl\User;
+use mysql_xdevapi\Result;
 
 /**
  * @extends ServiceEntityRepository<Sortie>
@@ -58,6 +59,19 @@ class SortieRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
+    }
+
+    /**
+     * @return Sortie[] Returns an array of Sortie objects of non Inscrit
+     */
+    public function findNonInscrit($user) {
+        $requete =  $this->createQueryBuilder('s' );
+        return $requete
+            ->andWhere(':value MEMBER OF s.participants')
+            ->setParameter('value', $user->getId())
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
     }
 
 //    public function findOneBySomeField($listeNoInscript): ?Sortie
