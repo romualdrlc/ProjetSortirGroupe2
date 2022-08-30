@@ -3,29 +3,36 @@
 {% block title %}Ville{% endblock %}
 
 {% block body %}
-    <h1>Ville</h1>
-
-    <table class="uk-table uk-table-divider">
-{#        <thead>#}
-{#        <tr>#}
-{#            <th>{{ ville.id }}</th>#}
-{#        </tr>#}
-{#        </thead>#}
-        <tbody>
-        <tr>
-            <th>Nom</th>
-            <td>{{ ville.nom }}</td>
-        </tr>
-        <tr>
-            <th>CodePostal</th>
-            <td>{{ ville.codePostal }}</td>
-        </tr>
-
-        </tbody>
-    </table>
-    <div uk-margin>
-        <a class="uk-button uk-button-default" href="{{ path('app_ville_index') }}">back to list</a>
-        <a class="uk-button uk-button-default" href="{{ path('app_ville_edit', {'id': ville.id}) }}">edit</a>
+    <div class="uk-margin-large">
+        <h1>Ville</h1>
     </div>
-    {{ include('ville/_delete_form.html.twig') }}
+
+        <body>
+        <div class="uk-grid">
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">Nom</div>
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">{{ ville.nom }}</div>
+            <div class="uk-width-1-5"></div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">CodePostal</div>
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">{{ ville.codePostal }}</div>
+            <div class="uk-width-1-5"></div>
+        </div>
+
+        </body>
+
+    <div class="uk-grid">
+        <div class="uk-width-1-3"></div>
+        <div class="uk-width-1-3">
+            <a class="uk-button uk-button-default" href="{{ path('app_ville_index') }}">back to list</a>
+            <a class="uk-button uk-button-default" href="{{ path('app_ville_edit', {'id': ville.id}) }}">edit</a>
+            <a class="uk-button uk-button-default" href="{{ path('app_ville_delete', {'id': ville.id}) }}">delete</a>
+        </div>
+        <div class="uk-width-1-3"></div>
+    </div>
+
 {% endblock %}

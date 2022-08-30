@@ -3,11 +3,17 @@
 {% block title %}Edit Campus{% endblock %}
 
 {% block body %}
-    <h1>Edit Campus</h1>
+
+    <div class="uk-margin-large">
+        <div class="uk-grid">
+            <div class="uk-width-1-3"></div>
+            <div class="uk-width-1-3" >
+                 <h1>Edit Campus</h1>
+            </div>
+            <div class="uk-width-1-3"></div>
+        </div>
+    </div>
 
     {{ include('campus/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_campus_index') }}">back to list</a>
-
-    {{ include('campus/_delete_form.html.twig') }}
 {% endblock %}
