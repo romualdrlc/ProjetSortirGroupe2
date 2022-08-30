@@ -8,6 +8,7 @@
         <h1>Gérer les campus</h1>
     </div>
 
+
             <div class="uk-grid">
                 <div class="uk-width-1-5"></div>
                 <div class="uk-width-1-5">Nom</div>
@@ -22,7 +23,7 @@
                 <div  class="uk-width-1-5">{{ campus.nom }}</div>
                 <div  class="uk-width-1-5"></div>
                 <div  class="uk-width-1-5">
-                    <p uk-margin>
+                    <p class="uk-margin">
                         <a class="uk-button uk-button-default" href="{{ path('app_campus_show', {'id': campus.id}) }}">show</a>
                         <a class="uk-button uk-button-default" href="{{ path('app_campus_edit', {'id': campus.id}) }}">edit</a>
                         <a class="uk-button uk-button-default" href="{{ path('app_campus_delete', {'id': campus.id}) }}">delete</a>

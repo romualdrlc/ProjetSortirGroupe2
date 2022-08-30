@@ -43,7 +43,6 @@ class SortieController extends AbstractController
                 'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee,'listeNonInscrit' => $listeNonInscrit,'filterByDate'=>$filterByDate
             ]);
         } else {
-            dump($tabRequest);
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
             $campus = $campusRepository->find($tabRequest["campus"]);
             if (isset($tabRequest['public'])) {
