@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ class LieuController extends AbstractController
 {
     /**
      * @Route("/", name="app_lieu_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(LieuRepository $lieuRepository): Response
     {
@@ -48,6 +50,7 @@ class LieuController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_lieu_show", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function show(Lieu $lieu): Response
     {
@@ -58,6 +61,7 @@ class LieuController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="app_lieu_edit", methods={"GET", "POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, Lieu $lieu, LieuRepository $lieuRepository): Response
     {
@@ -78,6 +82,7 @@ class LieuController extends AbstractController
 
     /**
      * @Route("/{id}", name="app_lieu_delete", methods={"POST"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(Request $request, Lieu $lieu, LieuRepository $lieuRepository): Response
     {

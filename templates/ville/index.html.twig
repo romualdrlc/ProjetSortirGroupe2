@@ -50,4 +50,8 @@
                     <div class="uk-width-1-5"></div>
                     <div class="uk-width-1-5"></div>
             </div>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('app_lieu_index') }}">Gérer les lieux</a>
+    {% endif %}
 {% endblock %}
