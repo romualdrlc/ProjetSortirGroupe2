@@ -3,36 +3,45 @@
 {% block title %}Lieu index{% endblock %}
 
 {% block body %}
-    <h1>Lieu index</h1>
+    <h1>Tous les lieux enregistrés</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Rue</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for lieu in lieus %}
-            <tr>
-                <td>{{ lieu.nom }}</td>
-                <td>{{ lieu.rue }}</td>
-                <td>{{ lieu.latitude }}</td>
-                <td>{{ lieu.longitude }}</td>
-                <td>
+    <div class="uk-grid uk-padding-medium">
+        <div class="uk-width-1-6"></div>
+        <div class="uk-width-1-6">Nom</div>
+        <div class="uk-width-1-6">Rue</div>
+        <div class="uk-width-1-6">Latitude</div>
+        <div class="uk-width-1-6">Longitude</div>
+        <div class="uk-width-1-6">Actions</div>
+    </div>
+
+    <body>
+    {% for lieu in lieus %}
+        <div class="uk-grid uk-padding-medium">
+            <div  class="uk-width-1-6"></div>
+            <div  class="uk-width-1-6">{{ lieu.nom }}</div>
+            <div  class="uk-width-1-6">{{ lieu.rue }}</div>
+            <div  class="uk-width-1-6">{{ lieu.latitude }}</div>
+            <div  class="uk-width-1-6">{{ lieu.longitude }}</div>
+
+            <div  class="uk-width-1-6">
+                <p class="uk-margin">
                     <a href="{{ path('app_lieu_edit', {'id': lieu.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <div colspan="3">no records found</div>
+        </div>
+    {% endfor %}
+    </body>
+    <div class="uk-grid uk-padding-medium">
+        <div  class="uk-width-1-6"></div>
+        <div  class="uk-width-1-6">
+            <a href="{{ path('app_lieu_new') }}">Créer un nouveau lieu</a>
+        </div>
+        <div  class="uk-width-1-6"></div>
 
-    <a href="{{ path('app_lieu_new') }}">Créer un nouveau lieu</a>
+    </div>
+
 {% endblock %}
