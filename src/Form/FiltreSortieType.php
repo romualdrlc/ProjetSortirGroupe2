@@ -44,8 +44,8 @@ class FiltreSortieType extends AbstractType
                 'label'=> false,
                 'choices'  => [
                     "Sorties dont je suis l'oganisateur" => 1,
-                    "Sorties auxquelles je suis inscrite" => 2,
-                    "Sorties auxquelles je ne suis pas inscrite" => 3,
+                    "Sorties auxquelles je ne suis pas inscrite" => 2,
+                    "Sorties auxquelles je suis inscrite" => 3,
                     "Sorties passées" => 4,
                 ],
                 'expanded' => true,
