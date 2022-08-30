@@ -39,9 +39,8 @@ class ParticipantCsvType extends AbstractType
                         'mimeTypesMessage' => "This document isn't valid.",
                     ])
                 ],
-            ])
-            ->add('Envoyer', SubmitType::class);
-
+            ]);
+/*            ->add('send', SubmitType::class); // We could have added it in the view, as stated in the framework recommendations*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void
