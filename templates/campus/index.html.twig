@@ -3,36 +3,48 @@
 {% block title %}Campus index{% endblock %}
 
 {% block body %}
-    <h1>Gérer les campus</h1>
-    <table class="uk-table uk-table-divider">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
+
+    <div class="uk-margin-large">
+        <h1>Gérer les campus</h1>
+    </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">Nom</div>
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">actions</div>
+                <div class="uk-width-1-5"></div>
+            </div>
+        <body>
         {% for campus in campuses %}
-            <tr>
-                <td>{{ campus.nom }}</td>
-                <td>
+            <div class="uk-grid">
+                <div  class="uk-width-1-5"></div>
+                <div  class="uk-width-1-5">{{ campus.nom }}</div>
+                <div  class="uk-width-1-5"></div>
+                <div  class="uk-width-1-5">
                     <p uk-margin>
                         <a class="uk-button uk-button-default" href="{{ path('app_campus_show', {'id': campus.id}) }}">show</a>
-                        <a class="uk-button uk-button-default"
-                           id="btn-edit" href="{{ path('app_campus_edit', {'id': campus.id}) }}" >edit</a>
-                        {{ include('campus/_delete_form.html.twig') }}
+                        <a class="uk-button uk-button-default" href="{{ path('app_campus_edit', {'id': campus.id}) }}">edit</a>
+                        <a class="uk-button uk-button-default" href="{{ path('app_campus_delete', {'id': campus.id}) }}">delete</a>
                     </p>
-                </td>
-            </tr>
+                </div>
+                <div class="uk-width-1-5"></div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+            <div>
+                <div colspan="3">no records found</div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-    <p uk-margin>
-        <a class="uk-button uk-button-default" href="{{ path('app_campus_new') }}" id="btn-ajouter">Ajouter</a>
-    </p>
-    <div id="form-ajouter"></div>
+        </body>
+            <div  class="uk-grid">
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">
+                    <p uk-margin>
+                        <a class="uk-button uk-button-default" href="{{ path('app_campus_new') }}">Ajouter</a>
+                    </p>
+                </div>
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5"></div>
+            </div>
 {% endblock %}

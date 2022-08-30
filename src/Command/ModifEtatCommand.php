@@ -74,7 +74,6 @@ class ModifEtatCommand extends Command
             $sortie->setEtat($PASSEE);
         }
 
-
         if($maintenant < $sortie->getDateLimiteInscription()) {
 
             $sortie->setEtat($OUVERT);
@@ -89,9 +88,9 @@ class ModifEtatCommand extends Command
         $sortie->setEtat($ARCHIVEE);
         }
 
-        if($sortie->getEtat()->getId() == 6) {
+     /*   if($sortie->getEtat()->getId() == 6) {
             $sortie->setEtat($ANNULEE);
-        }
+        }*/
 
         $this->entityManager->persist($sortie);
         $this->entityManager->flush();

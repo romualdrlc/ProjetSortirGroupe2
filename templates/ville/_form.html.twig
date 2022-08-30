@@ -1,18 +1,22 @@
 <div class="uk-form-horizontal uk-margin-large">
     {{ form_start(form) }}
-    <div class="form-group">
-        <input type="hidden" name="_token" id="tokenid" value="{{ csrf_token('delete')}}"/>
-    </div>
-    <div class="uk-margin">
-        <div class="uk-form-controls">
-            {{ form_row(form.nom) }}
+
+
+        <div class="form-group">
+            <input type="hidden" name="_token" id="tokenid" value="{{ csrf_token('delete')}}"/>
         </div>
-    </div>
-    <div class="uk-margin">
-        <div class="uk-form-controls">
-            {{ form_row(form.codePostal) }}
+        <div class="uk-margin">
+            <div class="uk-form-controls">
+                {{ form_row(form.nom) }}
+            </div>
         </div>
-    </div>
+        <div class="uk-margin">
+            <div class="uk-form-controls">
+                {{ form_row(form.codePostal) }}
+            </div>
+        </div>
+
+
     <p uk-margin>
         <button class="uk-button uk-button-default">{{ button_label|default('Save') }}</button>
     </p>

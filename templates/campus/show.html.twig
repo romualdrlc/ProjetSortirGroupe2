@@ -3,21 +3,37 @@
 {% block title %}Campus{% endblock %}
 
 {% block body %}
-    <h1>Campus</h1>
-    <table class="uk-table uk-table-divider">
-{#        <thead>#}
-{#        </thead>#}
-        <tbody>
-        <tr>
-            <th>Nom</th>
-            <td>{{ campus.nom }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <div uk-margin>
-        <a class="uk-button uk-button-default" href="{{ path('app_campus_index') }}">back to list</a>
-        <a class="uk-button uk-button-default" href="{{ path('app_campus_edit', {'id': campus.id}) }}">edit</a>
+
+    <div class="uk-margin-large">
+
+        <h1>Campus</h1>
     </div>
-    {{ include('campus/_delete_form.html.twig') }}
+
+        <body>
+            <div class="uk-grid">
+
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">
+                    <div>Nom {{ campus.nom }}</div>
+                </div>
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5"></div>
+
+            </div>
+        </body>
+
+    <div class="uk-grid">
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5">
+            <a class="uk-button uk-button-default" href="{{ path('app_campus_index') }}">back</a>
+            <a class="uk-button uk-button-default" href="{{ path('app_campus_edit', {'id': campus.id}) }}">edit</a>
+            <a class="uk-button uk-button-default" href="{{ path('app_campus_delete', {'id': campus.id}) }}">delete</a>
+        </div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+    </div>
+
 
 {% endblock %}

@@ -3,39 +3,51 @@
 {% block title %}Ville index{% endblock %}
 
 {% block body %}
+
     <h1>Gérer les villes</h1>
 
-    <table class="uk-table uk-table-divider">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Code Postal</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+
+
+            <div class="uk-grid">
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">Nom</div>
+                <div class="uk-width-1-5">Code Postal</div>
+                <div class="uk-width-1-5">Actions</div>
+                <div class="uk-width-1-5"></div>
+            </div>
+
+        <body>
         {% for ville in villes %}
-            <tr>
-                <td>{{ ville.nom }}</td>
-                <td>{{ ville.codePostal }}</td>
-                <td>
+            <div class="uk-grid">
+                <div class="uk-width-1-5"></div>
+                <div class="uk-width-1-5">{{ ville.nom }}</div>
+                <div class="uk-width-1-5">{{ ville.codePostal }}</div>
+                <div class="uk-width-1-5">
                     <p uk-margin>
                         <a class="uk-button uk-button-default" href="{{ path('app_ville_show', {'id': ville.id}) }}">show</a>
                         <a class="uk-button uk-button-default" href="{{ path('app_ville_edit', {'id': ville.id}) }}">edit</a>
-                        {{ include('ville/_delete_form.html.twig') }}
+                        <a class="uk-button uk-button-default" href="{{ path('app_ville_delete', {'id': ville.id}) }}"> delete</a>
                     </p>
-
-                </td>
-            </tr>
+                </div>
+                <div class="uk-width-1-5"></div>
+            </div>
         {% else %}
-            <tr>
+            <div>
                 <td colspan="4">no records found</td>
-            </tr>
+            </div>
         {% endfor %}
 
-        </tbody>
-    </table>
-    <p uk-margin>
-        <a class="uk-button uk-button-default" href="{{ path('app_ville_new') }}">Ajouter</a>
-    </p>
+        </body>
+
+            <div  class="uk-grid">
+                    <div class="uk-width-1-5"></div>
+                    <div class="uk-width-1-5"></div>
+                    <div class="uk-width-1-5">
+                        <p uk-margin>
+                            <a class="uk-button uk-button-default" href="{{ path('app_ville_new') }}">Ajouter</a>
+                        </p>
+                    </div>
+                    <div class="uk-width-1-5"></div>
+                    <div class="uk-width-1-5"></div>
+            </div>
 {% endblock %}

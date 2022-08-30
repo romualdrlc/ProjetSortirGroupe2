@@ -5,42 +5,51 @@
 {% block body %}
     <h1>Tous les participants</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>Actif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for participant in participants %}
-            <tr>
-                <td>{{ participant.email }}</td>
-                <td>{{ participant.roles ? participant.roles|json_encode : '' }}</td>
-                <td>{{ participant.password }}</td>
-                <td>{{ participant.nom }}</td>
-                <td>{{ participant.prenom }}</td>
-                <td>{{ participant.telephone }}</td>
-                <td>{{ participant.actif ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_participant_show', {'id': participant.id}) }}">show</a>
-                    <a href="{{ path('app_participant_edit', {'id': participant.id}) }}">edit</a>
-                </td>
-            </tr>
+
+
+            <div class="uk-flex uk-margin-medium">
+                <div class=" uk-width-1-10 uk-text-bold">Email</div>
+                <div class=" uk-width-1-10 uk-text-bold" >Roles</div>
+                <div class=" uk-width-1-10 uk-text-bold">Password</div>
+                <div class=" uk-width-1-10 uk-text-bold">Nom</div>
+                <div class=" uk-width-1-10 uk-text-bold">Prenom</div>
+                <div class=" uk-width-1-10 uk-text-bold" >Telephone</div>
+                <div class=" uk-width-1-10 uk-text-bold">Actif</div>
+                <div class=" uk-width-1-10 uk-text-bold">actions</div>
+            </div>
+
+                 {% for participant in participants %}
+            <div class="uk-flex">
+            <div  class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.email }}</div>
+                <div   class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.roles ? participant.roles|json_encode : '' }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.password }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.prenom }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.telephone }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Yes' : 'No' }}</div>
+                <div class="uk-width-1-10">
+                    <a class="uk-button uk-button-default" href="{{ path('app_participant_show', {'id': participant.id}) }}">show</a>
+                    <a class="uk-button uk-button-default" href="{{ path('app_participant_edit', {'id': participant.id}) }}">edit</a>
+                </div>
+            </div>
+
+
         {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
+            <div class="uk-grid">
+                <div colspan="10">no records found</div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
+
+    <div class="uk-grid uk-margin-medium">
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5">
+            <a class="uk-button uk-button-default" href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
+        </div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+    </div>
 
     <p>Si vous souhaitez intégrer un fichier .csv contenant les participants à inscrire, <a href="{{ path('app_test_upload') }}">cliquez ici.</a>  </p>
+
 {% endblock %}
