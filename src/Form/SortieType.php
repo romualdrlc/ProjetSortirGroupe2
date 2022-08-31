@@ -21,7 +21,8 @@ class SortieType extends AbstractType
             ->add('nom')
             ->add('dateHeureDebut', DateTimeType::class, [
                 'widget' => 'single_text',
-                'required'=>false
+                'required'=>false,
+                'data' => new \DateTime()
             ])
             ->add('duree')
             ->add('dateLimiteInscription', DateTimeType::class, [
