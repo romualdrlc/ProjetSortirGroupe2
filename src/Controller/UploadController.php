@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Form\ParticipantCsvType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\FileUploader;
@@ -12,6 +13,7 @@ class UploadController extends AbstractController
 
     /**
      * @Route("/test-upload", name="app_test_upload")
+     * @IsGranted("ROLE_USER")
      */
     public function excelCommunesAction(Request $request, FileUploader $file_uploader)
     {

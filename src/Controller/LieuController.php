@@ -29,6 +29,7 @@ class LieuController extends AbstractController
 
     /**
      * @Route("/new", name="app_lieu_new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request, LieuRepository $lieuRepository): Response
     {
