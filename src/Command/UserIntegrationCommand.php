@@ -72,6 +72,7 @@ class UserIntegrationCommand extends Command
                     ->setEmail($line[2])
                     ->setRoles((array)'ROLE_USER')
                     ->setPseudo($line[3])
+                    ->setActif(true)
                     ->setUpdatedAt(new \DateTime());
 
                 $participant->setPassword($this->hashedPassword->hashPassword($participant, "password"));

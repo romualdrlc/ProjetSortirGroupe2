@@ -4,10 +4,10 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\Participant;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -69,7 +69,6 @@ class ParticipantType extends AbstractType
                     "class" => "uk-select"
                 ],
             ])
-            ->add('actif')
         ;
     }
 

@@ -60,6 +60,7 @@ class ParticipantController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $participant->setActif(true);
             $participantRepository->add($participant, true);
             $em->persist($participant);
             $em->flush();
