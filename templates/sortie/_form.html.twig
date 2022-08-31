@@ -20,14 +20,14 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.duree) }}</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="time" name="{{ field_name(form.duree) }}" value="{{ field_value(form.duree) }}">
+                <input class="uk-input" id="form-horizontal-text" type="number" min="1" name="{{ field_name(form.duree) }}" value="{{ field_value(form.duree) }}">
             </div>
         </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.nbInscriptionsMax) }}</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="text" name="{{ field_name(form.nbInscriptionsMax) }}" value="{{ field_value(form.nbInscriptionsMax) }}">
+                <input class="uk-input" id="form-horizontal-text" type="number" min="1" name="{{ field_name(form.nbInscriptionsMax) }}" value="{{ field_value(form.nbInscriptionsMax) }}">
             </div>
         </div>
 
