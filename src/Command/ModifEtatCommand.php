@@ -59,27 +59,29 @@ class ModifEtatCommand extends Command
             $dateArchive = ($sortie->getDateHeureDebut()->modify('+ 30 days'));
 
         if ($maintenant > $sortie->getDateLimiteInscription() and $maintenant < $sortie->getDateHeureDebut()){
-
-            $sortie->setEtat(Etat::ETAT_CLOTURE);
+            $etatCloture = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_CLOTURE]);
+            dump($etatCloture);
+            $sortie->setEtat($etatCloture);
         }
 
         if ($maintenant > $dateFinActivite ){
-
-            $sortie->setEtat(Etat::ETAT_PASSEE);
+            $etatPassee = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_PASSEE]);
+            $sortie->setEtat($etatPassee);
         }
 
         if($maintenant < $sortie->getDateLimiteInscription()) {
-
-            $sortie->setEtat(Etat::ETAT_OUVERT);
+            $etatOuvert = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_OUVERT]);
+            $sortie->setEtat($etatOuvert);
         }
 
         if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
-            $sortie->setEtat(Etat::ETAT_EN_COURS);
+            $etatEnCours = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_EN_COURS]);
+            $sortie->setEtat($etatEnCours);
         }
 
-        if($maintenant > $dateArchive)
-        {
-        $sortie->setEtat(Etat::ETAT_ARCHIVEE);
+        if($maintenant > $dateArchive) {
+            $etatArchivee = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_ARCHIVEE]);
+            $sortie->setEtat($etatArchivee);
         }
 
      /*   if($sortie->getEtat()->getId() == 6) {
