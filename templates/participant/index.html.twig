@@ -22,7 +22,7 @@
         <div class="uk-flex">
             <div class=" uk-width-1-10 uk-text-bold"></div>
             {% if participant.pseudo is same as(app.user.pseudo) %}
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.pseudo }}(vous)</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.pseudo }}<strong> (vous)</strong></div>
             {% else %}
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.pseudo }}</div>
             {% endif %}
