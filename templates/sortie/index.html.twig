@@ -11,8 +11,7 @@
         </div>
     </div>
 
-    {#        <div class="uk-flex uk-flex-center uk-margin"> #}
-    {#        <div class="uk-grid"> #}
+
     {{ form_start(form) }}
     <div class="uk-grid">
         <div class="uk-width">
@@ -30,14 +29,9 @@
                 </div>
             </div>
         </div>
-        <div class="uk-width uk-padding-small">
-            <div class="uk-grid">
-                <div class="uk-width-1-2">
-                    {{ form_label(form.public) }}
-                </div>
-                <div class="uk-width-1-2">
-                    {{ form_widget(form.public) }}
-                </div>
+        <div class="uk-width uk-padding-medium">
+            <div class="divCheckBox">
+                {{ form_row(form.public) }}
             </div>
         </div>
         <div class="uk-width uk-padding-small">
@@ -49,75 +43,53 @@
                 <div class="uk-width-1-3"></div>
             </div>
         </div>
-
-
-        {#                <div class="uk-flex uk-flex-column uk-margin-right"> #}
-        {#                    <div class="uk-margin"> #}
-        {#                        {{ form_label(form.campus) }} #}
-        {#                        {{ form_widget(form.campus) }} #}
-        {#                    </div> #}
-        {#                    <div class="uk-margin"> #}
-        {#                        {{ form_label(form.nomSortie) }} #}
-        {#                        {{ form_widget(form.nomSortie) }} #}
-        {#                    </div> #}
-        {#                    <div class="uk-margin"> #}
-        {#                        Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }} #}
-        {#                    </div> #}
-        {#                </div> #}
-        {#                <div class="uk-flex uk-flex-column uk-margin-left"> #}
-        {#                    {{ form_label(form.public) }} {{ form_widget(form.public) }} #}
-        {#                </div> #}
-        {#            </div> #}
-        {#            <button class="uk-button uk-button-default">Rechercher</button> #}
-
         {{ form_end(form) }}
-
     </div>
 
 
 
-    <div class="uk-flex uk-margin-medium">
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Nom de la sortie</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Date de la sortie</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Duree</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Cloture</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Inscrits/Places</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Etat</div>
-        <div class=" uk-width-auto uk-text-bold uk-text-center">Inscrit</div>
-        <div class=" uk-width-1-10 uk-text-bold uk-text-center">Organisateur</div>
-        <div class=" uk-width-2-10 uk-text-bold uk-text-center">Actions</div>
-    </div>
+            <div class="uk-flex uk-margin-medium">
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Nom de la sortie</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Date de la sortie</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Duree</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Cloture</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Inscrits/Places</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Etat</div>
+                <div class=" uk-width-auto uk-text-bold uk-text-center">Inscrit</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Organisateur</div>
+                <div class=" uk-width-2-10 uk-text-bold uk-text-center">Actions</div>
+            </div>
 
-    {% if sorties %}
+        {% if sorties %}
 
-        {% if isCheck %}
-            {% for sortie in app.user.organisateur %}
-                {% if sortie.etat.id != 7 %}
-                    <div class="uk-flex">
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.nom }}</div>
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.duree }}</div>
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</div>
-                        <div class="uk-width-1-10 uk-text-center"> {{ sortie.participants.count }}
-                            / {{ sortie.nbInscriptionsMax }}</div>
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.etat.libelle }}</div>
-                        {% if app.user in sortie.participants %}
-                            <div class="uk-width-auto uk-text-center">X</div>
-                        {% else %}
-                            <div class="uk-width-auto uk-text-center"></div>
-                        {% endif %}
-                        <div class="uk-width-1-10 uk-text-center">
-                            <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.participant.pseudo}) }}"> {{ sortie.participant.pseudo }} </a>
-                        </div>
-                        <div class="uk-width-1-10 uk-text-center">
-                            <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
-                               href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
-                            {% if app.user == sortie.participant %}
-                                <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
-                                   href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-                                <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
-                                   href="{{ path('app_sortie_delete_page', {'id': sortie.id}) }}">Annuler</a>
+            {% if isCheck %}
+                {% for sortie in app.user.organisateur %}
+                    {% if sortie.etat.id != 7 %}
+                        <div class="uk-flex">
+                            <div class="uk-width-1-10 uk-text-center">{{ sortie.nom }}</div>
+                            <div class="uk-width-1-10 uk-text-center">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
+                            <div class="uk-width-1-10 uk-text-center">{{ sortie.duree }}</div>
+                            <div class="uk-width-1-10 uk-text-center">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</div>
+                            <div class="uk-width-1-10 uk-text-center"> {{ sortie.participants.count }}
+                                / {{ sortie.nbInscriptionsMax }}</div>
+                            <div class="uk-width-1-10 uk-text-center">{{ sortie.etat.libelle }}</div>
+                            {% if app.user in sortie.participants %}
+                                <div class="uk-width-auto uk-text-center">X</div>
+                            {% else %}
+                                <div class="uk-width-auto uk-text-center"></div>
                             {% endif %}
+                            <div class="uk-width-1-10 uk-text-center">
+                                <a href="{{ path('app_participant_show_pseudo', {'pseudo': sortie.participant.pseudo}) }}"> {{ sortie.participant.pseudo }} </a>
+                            </div>
+                            <div class="uk-width-1-10 uk-text-center">
+                                <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
+                                   href="{{ path('app_sortie_show', {'id': sortie.id}) }}">Afficher</a>
+                                {% if app.user == sortie.participant %}
+                                    <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
+                                       href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+                                    <a class="uk-button uk-button-default uk-width-1-1 uk-margin-small"
+                                       href="{{ path('app_sortie_delete_page', {'id': sortie.id}) }}">Annuler</a>
+                                {% endif %}
 
                             {% if sortie.etat.id == 2 %}
                                 {% if app.user.actif %}
@@ -392,14 +364,13 @@
         {% endfor %}
     {% endfor %}
 
-    <div class="uk-flex">
-        <div class=" uk-width-1-3"></div>
-        <div class=" uk-width-1-3">
-            <p uk-margin>
-                <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle sortie</a>
-            </p>
+        <div class="uk-flex">
+            <div class=" uk-width-1-3"></div>
+            <div class=" uk-width-1-3">
+                <p uk-margin>
+                    <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle sortie</a>
+                </p>
+            </div>
+            <div class=" uk-width-1-3"></div>
         </div>
-        <div class=" uk-width-1-3"></div>
-    </div>
-    </div>
 {% endblock %}
