@@ -3,7 +3,14 @@
 {% block title %}Edit Ville{% endblock %}
 
 {% block body %}
-    <h1>Edit Ville</h1>
+    <div class="uk-flex uk-padding-large">
+        <div class=" uk-width-1-4"></div>
+        <div class=" uk-width-2-4">
+            <h1 class="uk-text-center">Edit Ville</h1>
+        </div>
+        <div class=" uk-width-1-4"></div>
+    </div>
+
 
     <div>
         {{ include('ville/_form.html.twig', {'button_label': 'Update'}) }}
