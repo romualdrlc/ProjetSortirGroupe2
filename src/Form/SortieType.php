@@ -6,6 +6,7 @@ use App\Entity\Campus;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -19,12 +20,12 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateHeureDebut', DateType::class, [
+            ->add('dateHeureDebut', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required'=>false
             ])
             ->add('duree')
-            ->add('dateLimiteInscription', DateType::class, [
+            ->add('dateLimiteInscription', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required'=>false
             ])
