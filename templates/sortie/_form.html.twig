@@ -13,7 +13,7 @@
         <div class="uk-margin">
             <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.dateHeureDebut) }}</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="form-horizontal-text" type="date" name=" {{ field_name(form.dateHeureDebut) }}" value="{{ field_value(form.dateHeureDebut) }}">
+                {{ form_widget(form.dateHeureDebut) }}
             </div>
         </div>
 

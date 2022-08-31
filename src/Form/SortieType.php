@@ -23,6 +23,7 @@ class SortieType extends AbstractType
                 'widget' => 'single_text',
                 'required'=>false,
                 'data' => new \DateTime(),
+                'attr' => ['class' => 'uk-input', 'id' => 'form-horizontal-text','type' => "date",'name'=>'dateHeureDebut']
             ])
             ->add('duree')
             ->add('dateLimiteInscription', DateTimeType::class, [
