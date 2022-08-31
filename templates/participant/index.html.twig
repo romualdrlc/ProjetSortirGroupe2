@@ -10,10 +10,8 @@
             <div class="uk-flex uk-margin-medium">
                 <div class=" uk-width-1-10 uk-text-bold">Email</div>
                 <div class=" uk-width-1-10 uk-text-bold" >Roles</div>
-                <div class=" uk-width-1-10 uk-text-bold">Password</div>
                 <div class=" uk-width-1-10 uk-text-bold">Nom</div>
                 <div class=" uk-width-1-10 uk-text-bold">Prenom</div>
-                <div class=" uk-width-1-10 uk-text-bold" >Telephone</div>
                 <div class=" uk-width-1-10 uk-text-bold">Actif</div>
                 <div class=" uk-width-1-10 uk-text-bold">actions</div>
             </div>
@@ -21,11 +19,13 @@
                  {% for participant in participants %}
             <div class="uk-flex">
             <div  class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.email }}</div>
-                <div   class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.roles ? participant.roles|json_encode : '' }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.password }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
+                {% if participant.roles is same as(["ROLE_ADMIN","ROLE_USER"]) %}
+                    <div   class="uk-width-1-10 uk-panel uk-text-truncate">Administrateur</div>
+                {% else %}
+                    <div   class="uk-width-1-10 uk-panel uk-text-truncate">Utilisateur</div>
+                {% endif %}
+                    <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.prenom }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.telephone }}</div>
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Oui' : 'Non' }}</div>
                 <div class="uk-width-1-10">
                     <a class="uk-button uk-button-default" href="{{ path('app_participant_show', {'id': participant.id}) }}">Détails</a>
