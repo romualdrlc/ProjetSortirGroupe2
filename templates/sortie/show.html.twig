@@ -4,89 +4,89 @@
 
 {% block body %}
     <div class="uk-flex uk-padding-large">
-        <div class="uk-width-1-6" ></div>
-        <div class="uk-width-1-6" ></div>
+        <div class="uk-width-1-6"></div>
+        <div class="uk-width-1-6"></div>
         <div class="uk-width-1-6">
             <h1>Sortie</h1>
         </div>
-        <div class="uk-width-1-6" ></div>
-        <div class="uk-width-1-6" ></div>
-        <div class="uk-width-1-6" ></div>
+        <div class="uk-width-1-6"></div>
+        <div class="uk-width-1-6"></div>
+        <div class="uk-width-1-6"></div>
     </div>
 
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Nom de la sortie</div>
-                <div class="uk-width-1-4">{{ sortie.nom }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Date et heure de la sortie</div>
-                <div class="uk-width-1-4">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Duree</div>
-                <div class="uk-width-1-4">{{ sortie.duree }} minutes</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Date limite d'inscription</div>
-                <div class="uk-width-1-4">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Nombre de places</div>
-                <div class="uk-width-1-4">{{ sortie.nbInscriptionsMax }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4" ></div>
-                <div class="uk-width-1-4">Description et infos</div>
-                <div class="uk-width-1-4">{{ sortie.infosSortie }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Nom de la sortie</div>
+        <div class="uk-width-1-4">{{ sortie.nom }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Date et heure de la sortie</div>
+        <div class="uk-width-1-4">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Duree</div>
+        <div class="uk-width-1-4">{{ sortie.duree }} minutes</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Date limite d'inscription</div>
+        <div class="uk-width-1-4">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Nombre de places</div>
+        <div class="uk-width-1-4">{{ sortie.nbInscriptionsMax }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Description et infos</div>
+        <div class="uk-width-1-4">{{ sortie.infosSortie }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
 
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Campus</div>
-                <div class="uk-width-1-4">{{ sortie.campus.nom }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Lieu</div>
-                <div class="uk-width-1-4">{{ sortie.lieu.nom }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Rue</div>
-                <div class="uk-width-1-4">{{ sortie.lieu.rue }} </div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Ville</div>
-                <div class="uk-width-1-4">{{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Latitude</div>
-                <div class="uk-width-1-4">{{ sortie.lieu.latitude }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-width-1-4"></div>
-                <div class="uk-width-1-4">Longitude</div>
-                <div class="uk-width-1-4">{{ sortie.lieu.longitude }}</div>
-                <div class="uk-width-1-4"></div>
-            </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Campus</div>
+        <div class="uk-width-1-4">{{ sortie.campus.nom }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Lieu</div>
+        <div class="uk-width-1-4">{{ sortie.lieu.nom }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Rue</div>
+        <div class="uk-width-1-4">{{ sortie.lieu.rue }} </div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Ville</div>
+        <div class="uk-width-1-4">{{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Latitude</div>
+        <div class="uk-width-1-4">{{ sortie.lieu.latitude }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Longitude</div>
+        <div class="uk-width-1-4">{{ sortie.lieu.longitude }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
 
 
     <div class="uk-flex">
@@ -95,11 +95,15 @@
             <label for="participant">Participants :</label>
         </div>
         <div class="uk-width-1-4">
-            <select class="uk-select uk-width-1-2" name="participant" id="pet-participant">
-            {% for part in participants %}
-                <option value="">{{ part.nom }}</option>
-            {% endfor %}
-            </select>
+            {% if participants.count != 0 %}
+                <select class="uk-select uk-width-1-2" name="participant" id="pet-participant">
+                    {% for part in participants %}
+                        <option value="">{{ part.pseudo }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <div class="uk-width-1-4">Il n'y a aucun participant pour le moment.</div>
+            {% endif %}
         </div>
         <div class="uk-width-1-4"></div>
     </div>
@@ -107,10 +111,12 @@
     <div class="uk-flex uk-margin-large">
         <div class="uk-width-1-4"></div>
         <div class="uk-width-1-4">
-            <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small" href="{{ path('app_sortie_index') }}">Retour à la liste</a>
+            <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small" href="{{ path('app_sortie_index') }}">Retour
+                à la liste</a>
         </div>
         <div class="uk-width-1-4">
-            <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small" href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier cette sortie</a>
+            <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small"
+               href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier cette sortie</a>
         </div>
         <div class="uk-width-1-4"></div>
     </div>
