@@ -311,7 +311,7 @@
                         <div class="uk-width-1-10 uk-text-center">{{ sortie.nom }}</div>
                         <div class="uk-width-1-10 uk-text-center">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d-m-Y H:i:s') : '' }}</div>
                         <div class="uk-width-1-10 uk-text-center">{{ sortie.duree }}</div>
-                        <div class="uk-width-1-10 uk-text-center">{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i:s') : '' }}</div>
+                        <div class="uk-width-1-10 uk-text-center" >{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d-m-Y H:i:s') : '' }}</div>
                         <div class="uk-width-1-10 uk-text-center"> {{ sortie.participants.count }}
                             / {{ sortie.nbInscriptionsMax }}</div>
                         <div class="uk-width-1-10 uk-text-center">{{ sortie.etat.libelle }}</div>
