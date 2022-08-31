@@ -13,6 +13,7 @@ use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,21 +27,23 @@ class SortieController extends AbstractController
 {
     /**
      * @Route("/", name="app_sortie_index")
+     * @IsGranted("ROLE_USER")
      */
-    public function index(ParticipantRepository $participantRepository,SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
+    public function index(ParticipantRepository $participantRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
+
         $form = $this->createForm(FiltreSortieType::class);
         $tabRequest = $request->get("filtre_sortie");
         $isCheck = false;
-        $listeInscrit = []  ;
+        $listeInscrit = [];
         $listeSortiePassee = [];
         $listeNonInscrit = [];
         $filterByDate = [];
 
         if ($tabRequest == null) {
             return $this->render('sortie/index.html.twig', [
-                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(),'isCheck' => $isCheck,
-                'listeInscrit' => $listeInscrit,'listeSortiePassee' => $listeSortiePassee,'listeNonInscrit' => $listeNonInscrit,'filterByDate'=>$filterByDate
+                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(), 'isCheck' => $isCheck,
+                'listeInscrit' => $listeInscrit, 'listeSortiePassee' => $listeSortiePassee, 'listeNonInscrit' => $listeNonInscrit, 'filterByDate' => $filterByDate
             ]);
         } else {
             $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
@@ -62,12 +65,14 @@ class SortieController extends AbstractController
             if (isset($tabRequest['dateDebut'])) {
                 $beginDate = $tabRequest['dateDebut'];
                 $endDate = $tabRequest['dateFin'];
-                $filterByDate = $sortieRepository->findByDate($beginDate,$endDate);
+                $filterByDate = $sortieRepository->findByDate($beginDate, $endDate);
             }
             $sorties = $sortieRepository->findByField($sortie, $campus);
             return $this->renderForm('sortie/index.html.twig',
-                compact('sorties', 'form','isCheck','listeInscrit','listeSortiePassee','listeNonInscrit','filterByDate'));
+                compact('sorties', 'form', 'isCheck', 'listeInscrit', 'listeSortiePassee', 'listeNonInscrit', 'filterByDate'));
         }
+
+
     }
 
     /**
@@ -155,8 +160,8 @@ class SortieController extends AbstractController
      * @Route("/organisateur/{pseudo}", name="app_participant_show_pseudo", methods={"GET"})
      */
     public function showByPseudo(
-        string $pseudo,
-        Participant $participant,
+        string                $pseudo,
+        Participant           $participant,
         ParticipantRepository $participantRepository
     ): Response
     {
@@ -179,13 +184,13 @@ class SortieController extends AbstractController
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
 
 
-            if ($sortie->getEtat()->getLibelle() ==='Ouverte' ) {
-                $sortie->addParticipant($moimeme);
-                $entityManager->persist($sortie);
-                $entityManager->flush();
+        if ($sortie->getEtat()->getLibelle() === 'Ouverte') {
+            $sortie->addParticipant($moimeme);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
-                return $this->redirectToRoute('app_sortie_index');
-            }
+            return $this->redirectToRoute('app_sortie_index');
+        }
 
         return $this->render('sortie/index.html.twig');
     }
@@ -194,7 +199,7 @@ class SortieController extends AbstractController
      * *@Route ("/desinscrit/{sortie}", name="app_desinscription")
      */
     public function desinscription(
-        Sortie $sortie,
+        Sortie                 $sortie,
         ParticipantRepository  $participantRepository,
         EntityManagerInterface $entityManager
     )
@@ -203,11 +208,11 @@ class SortieController extends AbstractController
         $moimeme = $participantRepository->findOneBy(["email" => $mail]);
 
 
-                $sortie->removeParticipant($moimeme);
-                $entityManager->persist($sortie);
-                $entityManager->flush();
+        $sortie->removeParticipant($moimeme);
+        $entityManager->persist($sortie);
+        $entityManager->flush();
 
-                return $this->redirectToRoute('app_sortie_index');
+        return $this->redirectToRoute('app_sortie_index');
     }
 
 }
