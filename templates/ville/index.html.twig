@@ -8,48 +8,58 @@
 
 
 
-            <div class="uk-grid">
-                <div class="uk-width-1-5"></div>
-                <div class="uk-width-1-5">Nom</div>
-                <div class="uk-width-1-5">Code Postal</div>
-                <div class="uk-width-2-5">Actions</div>
-            </div>
+    <div class="uk-grid">
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5">Nom</div>
+        <div class="uk-width-1-5">Code Postal</div>
+        <div class="uk-width-2-5">Actions</div>
+    </div>
 
-        <body>
-        {% for ville in villes %}
-            <div class="uk-grid">
-                <div class="uk-width-1-5"></div>
-                <div class="uk-width-1-5">{{ ville.nom }}</div>
-                <div class="uk-width-1-5">{{ ville.codePostal }}</div>
-                <div class="uk-width-2-5">
-                    <p class="uk-margin">
-                        <a class="uk-button uk-button-default" href="{{ path('app_ville_show', {'id': ville.id}) }}">show</a>
-                        <a class="uk-button uk-button-default" href="{{ path('app_ville_edit', {'id': ville.id}) }}">edit</a>
-                        <a class="uk-button uk-button-default" href="{{ path('app_ville_delete', {'id': ville.id}) }}">delete</a>
-                    </p>
-                </div>
+    <body>
+    {% for ville in villes %}
+        <div class="uk-grid">
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">{{ ville.nom }}</div>
+            <div class="uk-width-1-5">{{ ville.codePostal }}</div>
+            <div class="uk-width-2-5">
+                <p class="uk-margin">
+                    <a class="uk-button uk-button-default"
+                       href="{{ path('app_ville_edit', {'id': ville.id}) }}">Modifier</a>
+                    <a class="uk-button uk-button-default" href="{{ path('app_ville_delete', {'id': ville.id}) }}">Supprimer</a>
+                </p>
             </div>
-        {% else %}
-            <div>
-                <td colspan="4">no records found</td>
-            </div>
-        {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <td colspan="4">no records found</td>
+        </div>
+    {% endfor %}
 
-        </body>
+    </body>
 
-            <div  class="uk-grid">
-                    <div class="uk-width-1-5"></div>
-                    <div class="uk-width-1-5"></div>
-                    <div class="uk-width-1-5">
-                        <p uk-margin>
-                            <a class="uk-button uk-button-default" href="{{ path('app_ville_new') }}">Ajouter</a>
-                        </p>
-                    </div>
-                    <div class="uk-width-1-5"></div>
-                    <div class="uk-width-1-5"></div>
-            </div>
+    <div class="uk-grid">
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5">
+            <p uk-margin>
+                <a class="uk-button uk-button-default" href="{{ path('app_ville_new') }}">Ajouter</a>
+            </p>
+        </div>
+        <div class="uk-width-1-5"></div>
+        <div class="uk-width-1-5"></div>
+    </div>
+
 
     {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('app_lieu_index') }}">Gérer les lieux</a>
+        <div class="uk-grid">
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5">
+                <a href="{{ path('app_lieu_index') }}">Gérer les lieux</a>
+            </div>
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5"></div>
+            <div class="uk-width-1-5"></div>
+        </div>
     {% endif %}
+
 {% endblock %}
