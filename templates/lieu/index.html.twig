@@ -3,51 +3,45 @@
 {% block title %}Lieu index{% endblock %}
 
 {% block body %}
+    <h1>Tous les lieux enregistrés</h1>
 
-
-    <div class="uk-flex uk-padding-large">
-        <div class=" uk-width-1-4"></div>
-        <div class=" uk-width-2-4">
-             <h1 class="uk-text-center">Lieu index</h1>
-        </div>
-        <div class=" uk-width-1-4"></div>
+    <div class="uk-grid uk-padding-medium">
+        <div class="uk-width-1-6"></div>
+        <div class="uk-width-1-6">Nom</div>
+        <div class="uk-width-1-6">Rue</div>
+        <div class="uk-width-1-6">Latitude</div>
+        <div class="uk-width-1-6">Longitude</div>
+        <div class="uk-width-1-6">Actions</div>
     </div>
 
+    <body>
+    {% for lieu in lieus %}
+        <div class="uk-grid uk-padding-medium">
+            <div  class="uk-width-1-6"></div>
+            <div  class="uk-width-1-6">{{ lieu.nom }}</div>
+            <div  class="uk-width-1-6">{{ lieu.rue }}</div>
+            <div  class="uk-width-1-6">{{ lieu.latitude }}</div>
+            <div  class="uk-width-1-6">{{ lieu.longitude }}</div>
 
-        <div class="uk-flex">
-            <div class=" uk-width-1-3"></div>
-            <div class="uk-width-1-3">
-                <div>
-                    <div>Id</div>
-                    <div>Nom</div>
-                    <div>Rue</div>
-                    <div>Latitude</div>
-                    <div>Longitude</div>
-                    <div>actions</div>
-                </div>
-
-
-        {% for lieu in lieus %}
-            <div>
-                <div>{{ lieu.id }}</div>
-                <div>{{ lieu.nom }}</div>
-                <div>{{ lieu.rue }}</div>
-                <div>{{ lieu.latitude }}</div>
-                <div>{{ lieu.longitude }}</div>
-                <div>
-                    <a href="{{ path('app_lieu_show', {'id': lieu.id}) }}">show</a>
-                    <a href="{{ path('app_lieu_edit', {'id': lieu.id}) }}">edit</a>
-                </div>
+            <div  class="uk-width-1-6">
+                <p class="uk-margin">
+                    <a href="{{ path('app_lieu_edit', {'id': lieu.id}) }}">Modifier</a>
+                </p>
             </div>
-
-
-        {% else %}
-            <div>
-                <div colspan="6">no records found</div>
-            </div>
-        {% endfor %}
-
-            <a href="{{ path('app_lieu_new') }}">Create new</a>
-            <div class=" uk-width-1-3"></div>
         </div>
+    {% else %}
+        <div>
+            <div colspan="3">no records found</div>
+        </div>
+    {% endfor %}
+    </body>
+    <div class="uk-grid uk-padding-medium">
+        <div  class="uk-width-1-6"></div>
+        <div  class="uk-width-1-6">
+            <a href="{{ path('app_lieu_new') }}">Créer un nouveau lieu</a>
+        </div>
+        <div  class="uk-width-1-6"></div>
+
+    </div>
+
 {% endblock %}

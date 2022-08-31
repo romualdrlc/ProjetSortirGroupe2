@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
  * @Route("/participant")
+ * @IsGranted("ROLE_USER")
  */
 class ParticipantController extends AbstractController
 {
@@ -118,5 +118,49 @@ class ParticipantController extends AbstractController
         }
 
         return $this->redirectToRoute('app_participant_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/activer/{participant}", name="app_participant_activer")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function activerUtilisateur(
+        Participant $participant,
+        EntityManagerInterface $entityManager
+    )
+    {
+        $inactif = $participant;
+
+        if (!$inactif->isActif()){
+            $inactif->setActif(true);
+            $entityManager->persist($inactif);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_participant_index');
+        }
+
+        return $this->render('participant/show.html.twig');
+    }
+
+    /**
+     * @Route("/desactiver/{participant}", name="app_participant_desactiver")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function desactiverUtilisateur(
+        Participant $participant,
+        EntityManagerInterface $entityManager
+    )
+    {
+        $inactif = $participant;
+
+        if ($inactif->isActif()){
+            $inactif->setActif(false);
+            $entityManager->persist($inactif);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_participant_index');
+        }
+
+        return $this->render('participant/show.html.twig');
     }
 }

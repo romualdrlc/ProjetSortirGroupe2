@@ -29,7 +29,10 @@ class Sortie
 
     /**
      *
-     * @Assert\GreaterThan("today")
+     * @Assert\GreaterThan(
+     *     "today",
+     *     message="La date de la sortie doit forcément être supérieur à la date d'aujourd'hui"
+     * )
      *
      * @ORM\Column(type="datetime")
      */

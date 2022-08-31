@@ -45,47 +45,39 @@ class ModifEtatCommand extends Command
 
 
        $Allsortie = $this->sortieRepository->findAll();
-       $Alletat = $this->etatRepository->findAll();
        $maintenantErreur = new \DateTime;
        $maintenant = $maintenantErreur->modify("+120 minutes");
         //date_default_timezone_set('Europe/Paris');
        // $maintenant = new \DateTime();
 
-        $OUVERT = $Alletat[1];
-        $CLOTUREE = $Alletat[2];
-        $ENCOURS = $Alletat[3];
-        $PASSEE = $Alletat[4];
-        $ANNULEE = $Alletat[5];
-        $ARCHIVEE = $Alletat[6];
 
         foreach ($Allsortie as $sortie){
-
             $dateHeureDebut = clone $sortie->getDateHeureDebut();
             $dateFinActivite = clone ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
             $dateArchive = ($sortie->getDateHeureDebut()->modify('+ 30 days'));
 
         if ($maintenant > $sortie->getDateLimiteInscription() and $maintenant < $sortie->getDateHeureDebut()){
 
-            $sortie->setEtat($CLOTUREE);
+            $sortie->setEtat(Etat::ETAT_CLOTURE);
         }
 
         if ($maintenant > $dateFinActivite ){
 
-            $sortie->setEtat($PASSEE);
+            $sortie->setEtat(Etat::ETAT_PASSEE);
         }
 
         if($maintenant < $sortie->getDateLimiteInscription()) {
 
-            $sortie->setEtat($OUVERT);
+            $sortie->setEtat(Etat::ETAT_OUVERT);
         }
 
         if (($maintenant > $dateHeureDebut) and ($maintenant <= $dateFinActivite)){
-            $sortie->setEtat($ENCOURS);
+            $sortie->setEtat(Etat::ETAT_EN_COURS);
         }
 
         if($maintenant > $dateArchive)
         {
-        $sortie->setEtat($ARCHIVEE);
+        $sortie->setEtat(Etat::ETAT_ARCHIVEE);
         }
 
      /*   if($sortie->getEtat()->getId() == 6) {

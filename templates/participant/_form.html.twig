@@ -48,7 +48,7 @@
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">{{ form_label(form.campus) }}</label>
         <div class="uk-form-controls">
-            {{ form_row(form.campus) }}
+            {{ form_widget(form.campus) }}
         </div>
     </div>
     <div class="uk-margin">
@@ -57,7 +57,7 @@
             {{ form_row(form.roles) }}
         </div>
     </div>
-    <div class="js-upload" uk-form-custom>
+    <div class="js-upload uk-form-custom">
         <input type="file" multiple>
         <button class="uk-button uk-button-default" type="button" tabindex="-1">{{ form_row(form.imageFile) }}</button>
     </div>

@@ -17,8 +17,8 @@
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ participant.prenom }}</h3>
                         <h3 class="uk-card-title">{{ participant.nom }}</h3>
-                        <h3 class="uk-card-title">{{ participant.telephone }}</h3>
                         <h3 class="uk-card-title">{{ participant.email }}</h3>
+                        <h3 class="uk-card-title">{{ participant.telephone }}</h3>
                         <h3 class="uk-card-title">{{ participant.campus.nom }}</h3>
 
                     </div>
@@ -43,13 +43,23 @@
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ participant.prenom }}</h3>
                         <h3 class="uk-card-title">{{ participant.nom }}</h3>
-                        <h3 class="uk-card-title">**********************</h3>
+                        <h3 class="uk-card-title">{{ participant.email }}</h3>
                         <h3 class="uk-card-title">**********************</h3>
                         <h3 class="uk-card-title">**********************</h3>
 
                     </div>
                 </div>
             </div>
+            {% if is_granted("ROLE_ADMIN") %}
+                {{ include('participant/_delete_form.html.twig') }}
+                {% if participant.actif %}
+                    <a class="uk-button uk-button-default"
+                       href="{{ path('app_participant_desactiver', {'participant': participant.id}) }}">Désactiver l'utilisateur</a>
+                {% else %}
+                    <a class="uk-button uk-button-default"
+                       href="{{ path('app_participant_activer', {'participant': participant.id}) }}">Activer l'utilisateur</a>
+                {% endif %}
+            {% endif %}
         {% endif %}
 
     </div>
