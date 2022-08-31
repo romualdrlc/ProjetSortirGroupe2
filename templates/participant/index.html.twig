@@ -7,38 +7,41 @@
 
 
 
-            <div class="uk-flex uk-margin-medium">
-                <div class=" uk-width-1-10 uk-text-bold">Email</div>
-                <div class=" uk-width-1-10 uk-text-bold" >Roles</div>
-                <div class=" uk-width-1-10 uk-text-bold">Nom</div>
-                <div class=" uk-width-1-10 uk-text-bold">Prenom</div>
-                <div class=" uk-width-1-10 uk-text-bold">Actif</div>
-                <div class=" uk-width-1-10 uk-text-bold">actions</div>
-            </div>
+    <div class="uk-flex uk-margin-medium">
+        <div class=" uk-width-1-10 uk-text-bold"></div>
+        <div class=" uk-width-1-10 uk-text-bold">Email</div>
+        <div class=" uk-width-1-10 uk-text-bold">Roles</div>
+        <div class=" uk-width-1-10 uk-text-bold">Nom</div>
+        <div class=" uk-width-1-10 uk-text-bold">Prenom</div>
+        <div class=" uk-width-1-10 uk-text-bold">Actif</div>
+        <div class=" uk-width-1-10 uk-text-bold">actions</div>
+    </div>
 
-                 {% for participant in participants %}
-            <div class="uk-flex">
-            <div  class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.email }}</div>
-                {% if participant.roles is same as(["ROLE_ADMIN","ROLE_USER"]) %}
-                    <div   class="uk-width-1-10 uk-panel uk-text-truncate">Administrateur</div>
-                {% else %}
-                    <div   class="uk-width-1-10 uk-panel uk-text-truncate">Utilisateur</div>
-                {% endif %}
-                    <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.prenom }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Oui' : 'Non' }}</div>
-                <div class="uk-width-1-10">
-                    <a class="uk-button uk-button-default" href="{{ path('app_participant_show', {'id': participant.id}) }}">Détails</a>
-                </div>
+    {% for participant in participants %}
+        <div class="uk-flex">
+            <div class=" uk-width-1-10 uk-text-bold"></div>
+            <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.email }}</div>
+            {% if participant.roles is same as(["ROLE_ADMIN","ROLE_USER"]) %}
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">Administrateur</div>
+            {% else %}
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">Utilisateur</div>
+            {% endif %}
+            <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
+            <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.prenom }}</div>
+            <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Oui' : 'Non' }}</div>
+            <div class="uk-width-1-10">
+                <a class="uk-button uk-button-default"
+                   href="{{ path('app_participant_show', {'id': participant.id}) }}">Détails</a>
             </div>
+        </div>
 
 
-        {% else %}
-            <div class="uk-grid">
-                <div colspan="10">no records found</div>
-            </div>
-        {% endfor %}
-        </tbody>
+    {% else %}
+        <div class="uk-grid">
+            <div colspan="10">no records found</div>
+        </div>
+    {% endfor %}
+    </tbody>
     </table>
     <a href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
 
@@ -46,12 +49,14 @@
         <div class="uk-width-1-5"></div>
         <div class="uk-width-1-5"></div>
         <div class="uk-width-1-5">
-            <a class="uk-button uk-button-default" href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
+            <a class="uk-button uk-button-default" href="{{ path('app_participant_new') }}">Créer un nouveau
+                participant</a>
         </div>
         <div class="uk-width-1-5"></div>
         <div class="uk-width-1-5"></div>
     </div>
 
-    <p>Si vous souhaitez intégrer un fichier .csv contenant les participants à inscrire, <a href="{{ path('app_test_upload') }}">cliquez ici.</a>  </p>
+    <p>Si vous souhaitez intégrer un fichier .csv contenant les participants à inscrire, <a
+                href="{{ path('app_test_upload') }}">cliquez ici.</a></p>
 
 {% endblock %}
