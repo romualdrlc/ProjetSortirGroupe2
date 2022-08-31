@@ -12,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Etat
 {
-    const ETAT_OUVERT = 'Ouvert';
+    const ETAT_OUVERT = 'Ouverte';
 
-    const ETAT_CLOTURE = 'Cloturé';
+    const ETAT_CLOTURE = 'Clôturée';
 
-    const ETAT_ANNULE = 'Annulé';
+    const ETAT_ANNULE = 'Annulée';
 
-    const ETAT_EN_COURS = 'En cours';
+    const ETAT_EN_COURS = 'Activité en cours';
 
     const ETAT_PASSEE = 'Passée';
 

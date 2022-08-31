@@ -22,7 +22,7 @@ class SortieType extends AbstractType
             ->add('dateHeureDebut', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required'=>false,
-                'data' => new \DateTime()
+                'data' => new \DateTime(),
             ])
             ->add('duree')
             ->add('dateLimiteInscription', DateTimeType::class, [
