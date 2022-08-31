@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/css/ville.css') }}">
 
-    {#    <link rel="stylesheet" href="https://unpkg.com/mvp.css"> #}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
@@ -23,20 +22,17 @@
 <body>
 
 <header>
-    <nav class="uk-navbar-container" uk-navbar>
+    <nav class="uk-container uk-navbar">
         <div class="uk-navbar-left">
-
             <ul class="uk-navbar-nav">
                 <li class="uk-active"><a href="{{ path('app_sortie_index') }}">
                         <img class="logo" src="{{ asset('asset/img/logo.png') }}">
                     </a>
                 </li>
             </ul>
-
         </div>
         <div class="uk-navbar-right">
-
-            <ul class="uk-navbar-nav">
+            <ul class="uk-navbar-nav uk-visible@s">
                 {% if app.user %}
                     {% if is_granted("ROLE_ADMIN") %}
                         <li>
@@ -68,20 +64,51 @@
                             <a href="{{ path('app_logout') }}">Se déconnecter</a>
                         </li>
                     {% endif %}
-{#                {% else %}
+                {% endif %}
+            </ul>
+            <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
+        </div>
+    </nav>
+</header>
+<div id="sidenav" uk-offcanvas="flip: true" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav">
+            {% if app.user %}
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li>
+                        <a href="{{ path('app_participant_index') }}">Gérer les utilisateurs</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_ville_index') }}">Ville</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_campus_index') }}">Campus</a>
+                    </li>
                     <li>
                         <a href="{{ path('app_sortie_index') }}">Accueil</a>
                     </li>
                     <li>
+                        <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <li>
                         <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </li>#}
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('app_sortie_index') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_participant_show', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
                 {% endif %}
-            </ul>
-
-        </div>
-
-    </nav>
-</header>
+            {% endif %}
+            ....
+        </ul>
+    </div>
+</div>
 
 {% block body %}{% endblock %}
 
