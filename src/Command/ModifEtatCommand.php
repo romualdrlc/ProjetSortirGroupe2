@@ -51,6 +51,8 @@ class ModifEtatCommand extends Command
        // $maintenant = new \DateTime();
 
 
+
+
         foreach ($Allsortie as $sortie){
             $dateHeureDebut = clone $sortie->getDateHeureDebut();
             $dateFinActivite = clone ($sortie->getDateHeureDebut()->modify('+' . $sortie->getDuree() . 'minutes'));
