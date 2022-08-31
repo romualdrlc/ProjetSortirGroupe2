@@ -3,9 +3,8 @@
 {% block title %}Participant index{% endblock %}
 
 {% block body %}
-    <h1>Tous les participants</h1>
 
-
+    <h1 class=" uk-width-1-8 uk-text-bold">Tous les participants</h1>
 
     <div class="uk-flex uk-margin-medium">
         <div class=" uk-width-1-10 uk-text-bold"></div>
@@ -47,9 +46,6 @@
             <div colspan="10">no records found</div>
         </div>
     {% endfor %}
-    </tbody>
-    </table>
-    <a href="{{ path('app_participant_new') }}">Créer un nouveau participant</a>
 
     <div class="uk-grid uk-margin-medium">
         <div class="uk-width-1-5"></div>
