@@ -3,46 +3,90 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
-    <div class="uk-padding-large">
-        <div><span class="uk-label">Toutes les sorties</span></div>
-        <div class="uk-flex uk-flex-center uk-margin">
+    <div class="uk-margin-medium">
+        <div class="uk-grid">
+            <div class="uk-width-1-3"></div>
+            <h1 class="uk-width-1-3">Toutes les sorties</h1>
+            <div class="uk-width-1-3"></div>
+        </div>
+    </div>
+
+{#        <div class="uk-flex uk-flex-center uk-margin">#}
+{#        <div class="uk-grid">#}
             {{ form_start(form) }}
-            <div class="uk-flex">
-                <div class="uk-flex uk-flex-column uk-margin-right">
-                    <div class="uk-margin">
-                        {{ form_label(form.campus) }}
-                        {{ form_widget(form.campus) }}
-                    </div>
-                    <div class="uk-margin">
-                        {{ form_label(form.nomSortie) }}
-                        {{ form_widget(form.nomSortie) }}
-                    </div>
-                    <div class="uk-margin">
-                        Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }}
+            <div class="uk-grid">
+                <div class="uk-width">
+                    <div class="uk-grid uk-flex-center uk-padding-small">
+                        <div class="uk-width-1-4">
+                            {{ form_label(form.campus) }}
+                            {{ form_widget(form.campus) }}
+                        </div>
+                        <div class="uk-width-1-4">
+                            {{ form_label(form.nomSortie) }}
+                            {{ form_widget(form.nomSortie) }}
+                        </div>
+                        <div class="uk-width-1-4">
+                            Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }}
+                        </div>
                     </div>
                 </div>
-                <div class="uk-flex uk-flex-column uk-margin-left">
-                    {{ form_label(form.public) }} {{ form_widget(form.public) }}
+                <div class="uk-width uk-padding-small">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            {{ form_label(form.public) }}
+                        </div>
+                        <div class="uk-width-1-2">
+                            {{ form_widget(form.public) }}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <button class="uk-button uk-button-default">Rechercher</button>
+                <div class="uk-width uk-padding-small">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-3"></div>
+                        <div class="uk-width-1-3">
+                            <button class="uk-button uk-button-default">Rechercher</button>
+                        </div>
+                        <div class="uk-width-1-3"></div>
+                    </div>
+                </div>
+
+
+{#                <div class="uk-flex uk-flex-column uk-margin-right">#}
+{#                    <div class="uk-margin">#}
+{#                        {{ form_label(form.campus) }}#}
+{#                        {{ form_widget(form.campus) }}#}
+{#                    </div>#}
+{#                    <div class="uk-margin">#}
+{#                        {{ form_label(form.nomSortie) }}#}
+{#                        {{ form_widget(form.nomSortie) }}#}
+{#                    </div>#}
+{#                    <div class="uk-margin">#}
+{#                        Entre {{ form_widget(form.dateDebut) }} et {{ form_widget(form.dateFin) }}#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="uk-flex uk-flex-column uk-margin-left">#}
+{#                    {{ form_label(form.public) }} {{ form_widget(form.public) }}#}
+{#                </div>#}
+{#            </div>#}
+{#            <button class="uk-button uk-button-default">Rechercher</button>#}
 
             {{ form_end(form) }}
 
         </div>
 
 
-        <div class="uk-flex uk-margin-medium">
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Nom de la sortie</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Date de la sortie</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Duree</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Cloture</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Inscrits/Places</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Etat</div>
-            <div class=" uk-width-auto uk-text-bold uk-text-center">Inscrit</div>
-            <div class=" uk-width-1-10 uk-text-bold uk-text-center">Organisateur</div>
-            <div class=" uk-width-2-10 uk-text-bold uk-text-center">Actions</div>
-        </div>
+
+            <div class="uk-flex uk-margin-medium">
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Nom de la sortie</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Date de la sortie</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Duree</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Cloture</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Inscrits/Places</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Etat</div>
+                <div class=" uk-width-auto uk-text-bold uk-text-center">Inscrit</div>
+                <div class=" uk-width-1-10 uk-text-bold uk-text-center">Organisateur</div>
+                <div class=" uk-width-2-10 uk-text-bold uk-text-center">Actions</div>
+            </div>
 
         {% if sorties %}
 
@@ -322,8 +366,7 @@
             <div class=" uk-width-1-3"></div>
             <div class=" uk-width-1-3">
                 <p uk-margin>
-                    <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle
-                        sortie</a>
+                    <a class="uk-button uk-button-default" href="{{ path('app_sortie_new') }}">Créer une nouvelle sortie</a>
                 </p>
             </div>
             <div class=" uk-width-1-3"></div>
