@@ -26,10 +26,9 @@
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.nom }}</div>
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.prenom }}</div>
                 <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.telephone }}</div>
-                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Yes' : 'No' }}</div>
+                <div class="uk-width-1-10 uk-panel uk-text-truncate">{{ participant.actif ? 'Oui' : 'Non' }}</div>
                 <div class="uk-width-1-10">
-                    <a class="uk-button uk-button-default" href="{{ path('app_participant_show', {'id': participant.id}) }}">show</a>
-                    <a class="uk-button uk-button-default" href="{{ path('app_participant_edit', {'id': participant.id}) }}">edit</a>
+                    <a class="uk-button uk-button-default" href="{{ path('app_participant_show', {'id': participant.id}) }}">Détails</a>
                 </div>
             </div>
 

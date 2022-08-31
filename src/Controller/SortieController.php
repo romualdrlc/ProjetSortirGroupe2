@@ -82,7 +82,7 @@ class SortieController extends AbstractController
     {
         $sortie = new Sortie();
         $etat = new Etat();
-        $etat = $etatRepository->find(1);
+        $etat = $etatRepository->find(2);
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
