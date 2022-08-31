@@ -3,31 +3,47 @@
 {% block title %}Edit Sortie{% endblock %}
 
 {% block body %}
-    <h1>Annuler une sortie</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nom de la sortie</th>
-            <th>Date de la sortie</th>
-            <th>Campus</th>
-            <th>Lieu</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
+    <div class="uk-flex uk-padding-large">
+        <div class=" uk-width-1-4"></div>
+        <div class=" uk-width-2-4">
+            <h1 class="uk-text-center">Annuler une sortie</h1>
+        </div>
+        <div class=" uk-width-1-4"></div>
+    </div>
+
+        <div class="uk-flex uk-padding-large">
+            <div class=" uk-width-1-4">Nom de la sortie</div>
+            <div class=" uk-width-1-4">Date de la sortie</div>
+            <div class=" uk-width-1-4">Campus</div>
+            <div class=" uk-width-1-4">Lieu</div>
+        </div>
+
+
+
+        <div class="uk-flex uk-padding-large">
             {% if sortie %}
-                <td>{{ sortie.nom }}</td>
-                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.campus.nom }}</td>
-                <td>{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</td>
+                <div class=" uk-width-1-4">{{ sortie.nom }}</div>
+                <div class=" uk-width-1-4">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
+                <div class=" uk-width-1-4">{{ sortie.campus.nom }}</div>
+                <div class=" uk-width-1-4">{{ sortie.lieu.nom }} {{ sortie.lieu.rue }} {{ sortie.lieu.ville.codePostal }} {{ sortie.lieu.ville.nom }}</div>
             {% endif %}
-        </tr>
-        </tbody>
-    </table>
+        </div>
 
+    <div class="uk-flex uk-padding-large">
+        <div class=" uk-width-1-3"></div>
+        <div class=" uk-width-1-3">
+            <a class="uk-button uk-button-default uk uk-width-1-1" href="{{ path('app_sortie_index') }}">Retour à la liste</a>
+        </div>
+        <div class=" uk-width-1-3"></div>
+    </div>
 
-    <a href="{{ path('app_sortie_index') }}">Retour à la liste</a>
+    <div class="uk-flex">
+        <div class=" uk-width-1-3"></div>
+        <div class=" uk-width-1-3">
+            {{ include('sortie/_delete_form.html.twig') }}
+        </div>
+        <div class=" uk-width-1-3"></div>
+    </div>
 
-    {{ include('sortie/_delete_form.html.twig') }}
 {% endblock %}

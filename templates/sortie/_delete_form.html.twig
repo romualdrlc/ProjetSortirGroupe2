@@ -1,6 +1,10 @@
 <form method="post" action="{{ path('app_sortie_delete', {'id': sortie.id}) }}" onsubmit="return confirm('Etes-vous sûr(e) de vouloir supprimer cette sortie ?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
-    <label for="motif">Motif</label>
-    <input type="text" name="motif">
-    <button class="btn">Confirmer l'annulation</button>
+    <div class="uk-flex">
+        <div class="uk-width-1-2">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sortie.id) }}">
+                <label for="motif">Motif</label>
+                <input type="text" name="motif">
+        </div>
+        <button class="uk-button uk-button-default uk-width-1-2">Confirmer l'annulation</button>
+    </div>
 </form>

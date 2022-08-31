@@ -33,10 +33,16 @@ class SortieType extends AbstractType
             ->add('campus',EntityType::class,[
                 'class'=>Campus::class,
                 'choice_label'=>'nom',
+                "attr" => [
+                "class" => "uk-select"
+                ],
             ])
             ->add('lieu',EntityType::class,[
                 'class'=>Lieu::class,
                 'choice_label'=>'nom',
+                "attr" => [
+                "class" => "uk-select"
+                ],
             ])
 
             ->add('Annuler',ResetType::class,[
