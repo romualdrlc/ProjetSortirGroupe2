@@ -5,25 +5,22 @@
     font-weight: bold;
 }
 
-footer{
-    background-color: #ebe9eb;
-}
-
 .textFooter {
     text-align: center;
 }
 
 header{
-     background-color: #ebe9eb;
-
+    background-color: #ebe9eb;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
  }
 
 
 html{
     background: url("../img/photo-montagne-vallee-blanche-chamonix-mont-blanc.jpg") no-repeat center center fixed;
+    background-size: 120%;
 }
-
-
 
 
 .logo {
@@ -34,7 +31,11 @@ html{
 }
 
 footer{
+    background-color: #ebe9eb;
     margin: 0;
+    position: fixed; /* Set the navbar to fixed position */
+    bottom: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
 }
 
 header{flex-direction: row;
@@ -42,6 +43,8 @@ header{flex-direction: row;
 }
 
 body{
+    margin-top: 5%;
+    margin-bottom: 5%;
     display : flex;
     flex-direction: column;
     justify-content: center;
