@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_campus_delete', {'id': campus.id}) }}" onsubmit="return confirm('Pour supprimer ce campus, vous devez vous assuré qu\'il n\'est plus relié à aucun participant ou aucune sortie. Etes- vous sûr(e) de vouloir supprimer ce campus ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
-    <button class="btn">Delete</button>
+    <button class="uk-button uk-button-default" >Supprimer</button>
 </form>

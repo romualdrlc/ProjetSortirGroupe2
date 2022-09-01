@@ -11,12 +11,13 @@
         <div class=" uk-width-1-4"></div>
     </div>
 
+    {{ include('ville/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <div>
-        {{ include('ville/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-        <a class="uk-button uk-button-default" href="{{ path('app_ville_index') }}">back to list</a>
-
-        {{ include('ville/_delete_form.html.twig') }}
+    <div class="uk-flex uk-padding-small">
+        <div class=" uk-width-1-4"></div>
+        <div class=" uk-width-2-4">
+            {{ include('ville/_delete_form.html.twig') }}
+        </div>
+        <div class=" uk-width-1-4"></div>
     </div>
 {% endblock %}

@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_ville_delete', {'id': ville.id}) }}" onsubmit="return confirm('Pour supprimer cette ville, vous devez vous assuré qu\'elle n\'est plus relié à aucun lieu de sortie. Etes- vous sûr(e) de vouloir supprimer cette ville ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ville.id) }}">
-    <button class="uk-button uk-button-default">Delete</button>
+    <button class="uk-button uk-button-default">Supprimer</button>
 </form>
