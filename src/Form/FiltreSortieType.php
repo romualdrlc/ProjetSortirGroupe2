@@ -33,7 +33,8 @@ class FiltreSortieType extends AbstractType
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
-                'required'=>false
+                'required'=>false,
+                'data' => new \DateTime()
             ])
             ->add('public', ChoiceType::class, [
                 'multiple' => true,
