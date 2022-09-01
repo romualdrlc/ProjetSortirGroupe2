@@ -45,13 +45,7 @@ class ModifEtatCommand extends Command
 
 
        $Allsortie = $this->sortieRepository->findAll();
-       $maintenantErreur = new \DateTime;
-       $maintenant = $maintenantErreur->modify("+120 minutes");
-        //date_default_timezone_set('Europe/Paris');
-       // $maintenant = new \DateTime();
-
-
-
+       $maintenant = new \DateTime();
 
         foreach ($Allsortie as $sortie){
             $dateHeureDebut = clone $sortie->getDateHeureDebut();
@@ -60,7 +54,6 @@ class ModifEtatCommand extends Command
 
         if ($maintenant > $sortie->getDateLimiteInscription() and $maintenant < $sortie->getDateHeureDebut()){
             $etatCloture = $this->etatRepository->findOneBy(['libelle' => Etat::ETAT_CLOTURE]);
-            dump($etatCloture);
             $sortie->setEtat($etatCloture);
         }
 
