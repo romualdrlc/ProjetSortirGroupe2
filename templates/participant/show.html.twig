@@ -61,7 +61,6 @@
                 </div>
             </div>
             {% if is_granted("ROLE_ADMIN") %}
-                {{ include('participant/_delete_form.html.twig') }}
                 {% if participant.actif %}
                     <a class="uk-button uk-button-default"
                        href="{{ path('app_participant_desactiver', {'participant': participant.id}) }}">Désactiver l'utilisateur</a>
@@ -69,6 +68,7 @@
                     <a class="uk-button uk-button-default"
                        href="{{ path('app_participant_activer', {'participant': participant.id}) }}">Activer l'utilisateur</a>
                 {% endif %}
+                {{ include('participant/_delete_form.html.twig') }}
             {% endif %}
         {% endif %}
 

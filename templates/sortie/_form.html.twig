@@ -16,6 +16,9 @@
             <div class="uk-form-controls">
                 {{ form_widget(form.dateHeureDebut) }}
             </div>
+            <div class="uk-form-controls">
+                {{ form_errors(form.dateHeureDebut) }}
+            </div>
         </div>
 
         <div class="uk-margin">
@@ -36,6 +39,9 @@
             <label class="uk-form-label" for="form-horizontal-text">{{ field_label(form.dateLimiteInscription) }}</label>
             <div class="uk-form-controls">
                 {{ form_widget(form.dateLimiteInscription) }}
+            </div>
+            <div class="uk-form-controls">
+                {{ form_errors(form.dateLimiteInscription) }}
             </div>
         </div>
 
