@@ -1,3 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+
+*{
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+
+footer{
+    background-color: #ebe9eb;
+}
+
+.textFooter {
+    text-align: center;
+}
+
+header{
+     background-color: #ebe9eb;
+
+ }
+
+
+html{
+    background: url("../img/photo-montagne-vallee-blanche-chamonix-mont-blanc.jpg") no-repeat center center fixed;
+}
+
+
+
+
 .logo {
     width: 10vw;
     height: 10vh;
@@ -17,7 +45,37 @@ body{
     display : flex;
     flex-direction: column;
     justify-content: center;
+
 }
+.uk-button{
+
+    border-radius: 999px;
+}
+
+.uk-button:hover{
+    background-color: #5eb5e0;
+}
+
+h1{
+        background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+        margin: 10px;
+        padding: 15px 45px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+    }
+
+.btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
 
 .photo{
     width: 10vw;

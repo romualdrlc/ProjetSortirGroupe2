@@ -13,7 +13,7 @@
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.4/dist/css/uikit.min.css"/>
     <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('asset/css/ville.css') }}">
+
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
@@ -118,8 +118,8 @@
 {% block body %}{% endblock %}
 
 <footer>
-    <div class="uk-background-muted uk-height-large">
-        <div class="uk-card uk-card-default uk-card-body uk-text-center uk-position-z-index" uk-sticky="end: !.uk-height-large; offset: 80; media: 1600">  Sortir.com© Créer par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER</div>
+    <div>
+           <div class = "textFooter">  Sortir.com© Créée par Romuald LE CORROLLER, Bryan METRO et Hugo TESSIER</div>
     </div>
 </footer>
 
