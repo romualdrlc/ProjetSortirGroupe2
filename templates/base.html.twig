@@ -30,7 +30,9 @@
                     </a>
                 </li>
                 <li class="uk-active">
-                    <a href="#"> Bienvenue {{ app.user.pseudo}} !</a>
+                    {% if app.user %}
+                        <a href="#"> Bienvenue {{ app.user.pseudo}} !</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>
