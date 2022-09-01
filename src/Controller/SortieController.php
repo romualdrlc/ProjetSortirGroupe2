@@ -54,8 +54,6 @@ class SortieController extends AbstractController
         }else {
             $isVide = false;
         }
-
-
         if ($isVide) {
             dump($tabRequest);
             return $this->render('sortie/index.html.twig', [
@@ -93,40 +91,6 @@ class SortieController extends AbstractController
             return $this->renderForm('sortie/index.html.twig',
                 compact('sorties', 'form', 'isCheck', 'listeInscrit', 'listeSortiePassee', 'listeNonInscrit', 'filterByDate'));
         }
-
-
-//        if (!isset($tabRequest) && $tabRequest[0] == "") {
-//            return $this->render('sortie/index.html.twig', [
-//                'sorties' => $sortieRepository->findAll(), 'form' => $form->createView(), 'isCheck' => $isCheck,
-//                'listeInscrit' => $listeInscrit, 'listeSortiePassee' => $listeSortiePassee, 'listeNonInscrit' => $listeNonInscrit, 'filterByDate' => $filterByDate
-//            ]);
-//        } else {
-//            dump($tabRequest);
-//            $sortie = $sortieRepository->find($tabRequest["nomSortie"]);
-//            $campus = $campusRepository->find($tabRequest["campus"]);
-//            if (isset($tabRequest['public'])) {
-//                if (($tabRequest['public'][0] == "1")) {
-//                    $isCheck = true;
-//                }
-//                if ($tabRequest['public'][0] == "2") {
-//                    $listeInscrit = $sortieRepository->findBy(["participant" => $this->getUser()]);
-//                }
-//                if ($tabRequest['public'][0] == "3") {
-//                    $listeNonInscrit = $sortieRepository->findNonInscrit($this->getUser());
-//                }
-//                if ($tabRequest['public'][0] == "4") {
-//                    $listeSortiePassee = $sortieRepository->findBy(["etat" => "5"]);
-//                }
-//            }
-//            if (isset($tabRequest['dateDebut'])) {
-//                $beginDate = $tabRequest['dateDebut'];
-//                $endDate = $tabRequest['dateFin'];
-//                $filterByDate = $sortieRepository->findByDate($beginDate, $endDate);
-//            }
-//            $sorties = $sortieRepository->findByField($sortie, $campus);
-//            return $this->renderForm('sortie/index.html.twig',
-//                compact('sorties', 'form', 'isCheck', 'listeInscrit', 'listeSortiePassee', 'listeNonInscrit', 'filterByDate'));
-//        }
     }
 
     /**
