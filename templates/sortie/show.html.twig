@@ -22,6 +22,12 @@
     </div>
     <div class="uk-flex">
         <div class="uk-width-1-4"></div>
+        <div class="uk-width-1-4">Organisateur</div>
+        <div class="uk-width-1-4">{{ sortie.participant.pseudo }}</div>
+        <div class="uk-width-1-4"></div>
+    </div>
+    <div class="uk-flex">
+        <div class="uk-width-1-4"></div>
         <div class="uk-width-1-4">Date et heure de la sortie</div>
         <div class="uk-width-1-4">{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</div>
         <div class="uk-width-1-4"></div>
@@ -114,11 +120,13 @@
             <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small" href="{{ path('app_sortie_index') }}">Retour
                 à la liste</a>
         </div>
+        {% if app.user is same as(sortie.participant) %}
         <div class="uk-width-1-4">
             <a class="uk-button uk-button-default uk-width-1-2 uk-margin-small"
                href="{{ path('app_sortie_edit', {'id': sortie.id}) }}">Modifier cette sortie</a>
         </div>
         <div class="uk-width-1-4"></div>
+        {% endif %}
     </div>
 
 {% endblock %}
