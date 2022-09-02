@@ -35,7 +35,6 @@ class VilleController extends AbstractController
         $ville = new Ville();
         $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
-        dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $villeRepository->add($ville, true);
